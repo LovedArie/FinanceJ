@@ -1,4 +1,4 @@
-package ca.etsmtl.log240.financej;
+package ca.etsmtl.log240.financej.FinanceJ;
 /*
  * Account.java
  *
@@ -6,7 +6,6 @@ package ca.etsmtl.log240.financej;
  */
 
 import java.sql.*;
-import java.util.*;
 import javax.swing.table.*;
 import javax.swing.*;
 
