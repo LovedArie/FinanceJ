@@ -7,8 +7,34 @@
   <groupId>ca.etsmtl.log240.financej</groupId>
   <artifactId>financej-team12</artifactId>
   <version>1.0-SNAPSHOT</version>
-
   <name>FinanceJ</name>
+
+  <description>FinanceJ is a personal finance Java application. A simple
+    interface allows the user to track income/expenses vs budget. No
+    accounting
+    experience required
+  </description>
+  <organization>
+    <name>ÉTS - LOG240 - Team 12</name>
+    <url>http://www.etsmtl.ca</url>
+  </organization>
+  <developers>
+    <developer>
+      <name>Zakaria Haimeur</name>
+    </developer>
+    <developer>
+      <name>Marius Deleuil</name>
+    </developer>
+    <developer>
+      <name>Perry Ouy</name>
+    </developer>
+    <developer>
+      <name>Fabien Valero</name>
+    </developer>
+    <developer>
+      <name>Evan Vitalis</name>
+    </developer>
+  </developers>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
