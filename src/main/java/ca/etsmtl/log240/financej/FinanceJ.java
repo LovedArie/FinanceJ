@@ -15,7 +15,7 @@ import java.awt.Color;
  *
  * @author  rovitotv
  */
-public class FinanceJ extends JFrame {
+public class FinanceJ extends javax.swing.JFrame {
     // define the driver to use 
     private static String driver = "org.apache.derby.jdbc.EmbeddedDriver";
     // the database name  
@@ -38,7 +38,7 @@ public class FinanceJ extends JFrame {
              */
            Class.forName(driver).newInstance();
             System.out.println(driver + " loaded. ");
-        } catch (ClassNotFoundException e) {
+        } catch (java.lang.ClassNotFoundException e) {
             System.err.print("ClassNotFoundException: ");
             System.err.println(e.getMessage());
             System.out.println("\n    >>> Please check your CLASSPATH variable   <<<\n");
@@ -189,17 +189,17 @@ public class FinanceJ extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ExitButton = new JButton();
-        AccountButton = new JButton();
-        CategoriesButton = new JButton();
-        LedgerButton = new JButton();
-        jScrollPane1 = new JScrollPane();
-        AccountTotalTable = new JTable();
-        ReportsButton = new JButton();
-        TotalLabel = new JLabel();
-        jLabel1 = new JLabel();
+        ExitButton = new javax.swing.JButton();
+        AccountButton = new javax.swing.JButton();
+        CategoriesButton = new javax.swing.JButton();
+        LedgerButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        AccountTotalTable = new javax.swing.JTable();
+        ReportsButton = new javax.swing.JButton();
+        TotalLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FinanceJ");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -241,7 +241,7 @@ public class FinanceJ extends JFrame {
             }
         });
 
-        AccountTotalTable.setModel(new DefaultTableModel(
+        AccountTotalTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -253,7 +253,7 @@ public class FinanceJ extends JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                String.class, Float.class
+                java.lang.String.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false
@@ -276,54 +276,54 @@ public class FinanceJ extends JFrame {
             }
         });
 
-        TotalLabel.setForeground(new Color(255, 51, 51));
-        TotalLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+        TotalLabel.setForeground(new java.awt.Color(255, 51, 51));
+        TotalLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         TotalLabel.setText("$0.00");
 
         jLabel1.setText("Net Worth:");
 
-        GroupLayout layout = new GroupLayout(getContentPane());
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(TotalLabel, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(TotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                            .addComponent(CategoriesButton, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                            .addComponent(LedgerButton, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                            .addComponent(AccountButton, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                            .addComponent(ReportsButton, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                            .addComponent(ExitButton, GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(CategoriesButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                            .addComponent(LedgerButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                            .addComponent(AccountButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                            .addComponent(ReportsButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                            .addComponent(ExitButton, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(LedgerButton)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CategoriesButton)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(AccountButton)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ReportsButton)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ExitButton)
                 .addContainerGap(141, Short.MAX_VALUE))
-            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(26, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(TotalLabel, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(35, 35, 35))
         );
@@ -379,15 +379,15 @@ public class FinanceJ extends JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private JButton AccountButton;
-    private JTable AccountTotalTable;
-    private JButton CategoriesButton;
-    private JButton ExitButton;
-    private JButton LedgerButton;
-    private JButton ReportsButton;
-    private JLabel TotalLabel;
-    private JLabel jLabel1;
-    private JScrollPane jScrollPane1;
+    private javax.swing.JButton AccountButton;
+    private javax.swing.JTable AccountTotalTable;
+    private javax.swing.JButton CategoriesButton;
+    private javax.swing.JButton ExitButton;
+    private javax.swing.JButton LedgerButton;
+    private javax.swing.JButton ReportsButton;
+    private javax.swing.JLabel TotalLabel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
     //   ## DERBY EXCEPTION REPORTING CLASSES  ## 
