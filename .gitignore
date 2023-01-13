@@ -1,2 +1,6 @@
 
 .idea/discord.xml
+
+target/
+
+.idea/misc.xml
