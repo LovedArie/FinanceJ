@@ -1,4 +1,4 @@
-package ca.etsmtl.log240.financej.FinanceJ;
+package ca.etsmtl.log240.financej;
 /*
  * Account.java
  *
