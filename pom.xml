@@ -114,6 +114,34 @@
             <mainClass>ca.etsmtl.log240.financej.FinanceJ.FinanceJ</mainClass>
           </configuration>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.4</version>
+          <configuration>
+            <reportPlugins>
+              <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.7</version>
+                <reports>
+                  <report>index</report>
+                  <report>dependencies</report>
+                  <report>dependency-convergence</report>
+                  <report>plugin-management</report>
+                  <report>project-team</report>
+                  <report>plugins</report>
+                  <report>summary</report>
+                </reports>
+              </plugin>
+              <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+              </plugin>
+            </reportPlugins>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>
