@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE qalab [<!ELEMENT qalab (summary,file*)>
+<!ATTLIST qalab version CDATA #REQUIRED>
+<!ELEMENT summary (summaryresult*)>
+<!ELEMENT file (result+)>
+<!ATTLIST file id ID #REQUIRED>
+<!ATTLIST file path CDATA #REQUIRED>
+<!ELEMENT result EMPTY>
+<!ATTLIST result date CDATA #REQUIRED>
+<!ATTLIST result statvalue CDATA #REQUIRED>
+<!ATTLIST result type CDATA #REQUIRED>
+<!ELEMENT summaryresult EMPTY>
+<!ATTLIST summaryresult date CDATA #REQUIRED>
+<!ATTLIST summaryresult statvalue CDATA #REQUIRED>
+<!ATTLIST summaryresult filecount CDATA #REQUIRED>
+<!ATTLIST summaryresult type CDATA #REQUIRED>
+]>
+<qalab version="1.1">
+    <summary>
+        <summaryresult date="2023-01-17" filecount="6" statvalue="1510" type="checkstyle"/>
+        <summaryresult date="2023-01-17" filecount="6" statvalue="130" type="pmd"/>
+    </summary>
+    <file id="ca_etsmtl_log240_financej_Account.java" path="ca/etsmtl/log240/financej/Account.java">
+        <result date="2023-01-17" statvalue="505" type="checkstyle"/>
+        <result date="2023-01-17" statvalue="17" type="pmd"/>
+    </file>
+    <file id="ca_etsmtl_log240_financej_Category.java" path="ca/etsmtl/log240/financej/Category.java">
+        <result date="2023-01-17" statvalue="176" type="checkstyle"/>
+        <result date="2023-01-17" statvalue="18" type="pmd"/>
+    </file>
+    <file id="ca_etsmtl_log240_financej_DBUtils.java" path="ca/etsmtl/log240/financej/DBUtils.java">
+        <result date="2023-01-17" statvalue="48" type="checkstyle"/>
+        <result date="2023-01-17" statvalue="19" type="pmd"/>
+    </file>
+    <file id="ca_etsmtl_log240_financej_FinanceJ.java" path="ca/etsmtl/log240/financej/FinanceJ.java">
+        <result date="2023-01-17" statvalue="235" type="checkstyle"/>
+        <result date="2023-01-17" statvalue="26" type="pmd"/>
+    </file>
+    <file id="ca_etsmtl_log240_financej_Ledger.java" path="ca/etsmtl/log240/financej/Ledger.java">
+        <result date="2023-01-17" statvalue="347" type="checkstyle"/>
+        <result date="2023-01-17" statvalue="29" type="pmd"/>
+    </file>
+    <file id="ca_etsmtl_log240_financej_Reports.java" path="ca/etsmtl/log240/financej/Reports.java">
+        <result date="2023-01-17" statvalue="199" type="checkstyle"/>
+        <result date="2023-01-17" statvalue="21" type="pmd"/>
+    </file>
+</qalab>
