@@ -41,7 +41,14 @@
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
   </properties>
+  <scm>
+    <url>http://gitlab-ce.logti.etsmtl.ca/haimeurz/financej-team12</url>
+  </scm>
 
+  <issueManagement>
+    <system>Trac</system>
+    <url>http://${host}/trac/</url>
+  </issueManagement>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -71,6 +78,8 @@
               <report>project-team</report>
               <report>plugins</report>
               <report>summary</report>
+              <report>issue-tracking</report>
+              <report>scm</report>
             </reports>
           </reportSet>
         </reportSets>
@@ -105,6 +114,22 @@
             <ruleset>/rulesets/design.xml</ruleset>
           </rulesets>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-changes-plugin</artifactId>
+        <version>2.10</version>
+        <configuration>
+          <tracUser>${trac-username}</tracUser>
+          <tracPassword>${trac-password}</tracPassword>
+        </configuration>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>trac-report</report>
+            </reports>
+          </reportSet>
+        </reportSets>
       </plugin>
       <plugin>
         <groupId>net.objectlab</groupId>
