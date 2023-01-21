@@ -21,7 +21,7 @@
         <summaryresult date="2023-01-17" filecount="6" statvalue="130" type="pmd"/>
         <summaryresult date="2023-01-19" filecount="6" statvalue="1510" type="checkstyle"/>
         <summaryresult date="2023-01-19" filecount="6" statvalue="130" type="pmd"/>
-        <summaryresult date="2023-01-20" filecount="6" statvalue="1510" type="checkstyle"/>
+        <summaryresult date="2023-01-20" filecount="6" statvalue="1091" type="checkstyle"/>
         <summaryresult date="2023-01-20" filecount="6" statvalue="130" type="pmd"/>
     </summary>
     <file id="ca_etsmtl_log240_financej_Account.java" path="ca/etsmtl/log240/financej/Account.java">
@@ -29,7 +29,7 @@
         <result date="2023-01-17" statvalue="17" type="pmd"/>
         <result date="2023-01-19" statvalue="505" type="checkstyle"/>
         <result date="2023-01-19" statvalue="17" type="pmd"/>
-        <result date="2023-01-20" statvalue="505" type="checkstyle"/>
+        <result date="2023-01-20" statvalue="160" type="checkstyle"/>
         <result date="2023-01-20" statvalue="17" type="pmd"/>
     </file>
     <file id="ca_etsmtl_log240_financej_Category.java" path="ca/etsmtl/log240/financej/Category.java">
@@ -37,7 +37,7 @@
         <result date="2023-01-17" statvalue="18" type="pmd"/>
         <result date="2023-01-19" statvalue="176" type="checkstyle"/>
         <result date="2023-01-19" statvalue="18" type="pmd"/>
-        <result date="2023-01-20" statvalue="176" type="checkstyle"/>
+        <result date="2023-01-20" statvalue="169" type="checkstyle"/>
         <result date="2023-01-20" statvalue="18" type="pmd"/>
     </file>
     <file id="ca_etsmtl_log240_financej_DBUtils.java" path="ca/etsmtl/log240/financej/DBUtils.java">
@@ -45,7 +45,7 @@
         <result date="2023-01-17" statvalue="19" type="pmd"/>
         <result date="2023-01-19" statvalue="48" type="checkstyle"/>
         <result date="2023-01-19" statvalue="19" type="pmd"/>
-        <result date="2023-01-20" statvalue="48" type="checkstyle"/>
+        <result date="2023-01-20" statvalue="36" type="checkstyle"/>
         <result date="2023-01-20" statvalue="19" type="pmd"/>
     </file>
     <file id="ca_etsmtl_log240_financej_FinanceJ.java" path="ca/etsmtl/log240/financej/FinanceJ.java">
@@ -53,7 +53,7 @@
         <result date="2023-01-17" statvalue="26" type="pmd"/>
         <result date="2023-01-19" statvalue="235" type="checkstyle"/>
         <result date="2023-01-19" statvalue="26" type="pmd"/>
-        <result date="2023-01-20" statvalue="235" type="checkstyle"/>
+        <result date="2023-01-20" statvalue="219" type="checkstyle"/>
         <result date="2023-01-20" statvalue="26" type="pmd"/>
     </file>
     <file id="ca_etsmtl_log240_financej_Ledger.java" path="ca/etsmtl/log240/financej/Ledger.java">
@@ -61,7 +61,7 @@
         <result date="2023-01-17" statvalue="29" type="pmd"/>
         <result date="2023-01-19" statvalue="347" type="checkstyle"/>
         <result date="2023-01-19" statvalue="29" type="pmd"/>
-        <result date="2023-01-20" statvalue="347" type="checkstyle"/>
+        <result date="2023-01-20" statvalue="335" type="checkstyle"/>
         <result date="2023-01-20" statvalue="29" type="pmd"/>
     </file>
     <file id="ca_etsmtl_log240_financej_Reports.java" path="ca/etsmtl/log240/financej/Reports.java">
@@ -69,7 +69,7 @@
         <result date="2023-01-17" statvalue="21" type="pmd"/>
         <result date="2023-01-19" statvalue="199" type="checkstyle"/>
         <result date="2023-01-19" statvalue="21" type="pmd"/>
-        <result date="2023-01-20" statvalue="199" type="checkstyle"/>
+        <result date="2023-01-20" statvalue="172" type="checkstyle"/>
         <result date="2023-01-20" statvalue="21" type="pmd"/>
     </file>
 </qalab>

@@ -12,8 +12,9 @@ import java.text.SimpleDateFormat;
 import java.awt.Color;
 
 /**
+ * The type Ledger.
  *
- * @author  rovitotv
+ * @author rovitotv
  */
 public class Ledger extends javax.swing.JDialog {
 
@@ -22,13 +23,22 @@ public class Ledger extends javax.swing.JDialog {
     private TableColumn CategoryColumn;
     private JComboBox CategoryColumnComboBox;
 
-    /** Creates new form Ledger */
+    /**
+     * Creates new form Ledger  @param parent the parent
+     *
+     * @param modal the modal
+     */
     public Ledger(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         LedgerTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
+    /**
+     * Set db connection.
+     *
+     * @param DBConn the db conn
+     */
     public void SetDBConnection(Connection DBConn) {
         conn = DBConn;
         BuildAccountsComboBox();
@@ -42,6 +52,9 @@ public class Ledger extends javax.swing.JDialog {
         CategoryColumn.setCellEditor(new DefaultCellEditor(CategoryColumnComboBox));
     }
 
+    /**
+     * Build accounts combo box.
+     */
     public void BuildAccountsComboBox() {
         ResultSet AccountResult;
         Statement s;
@@ -61,6 +74,9 @@ public class Ledger extends javax.swing.JDialog {
         }
     }
 
+    /**
+     * Build category combo box.
+     */
     public void BuildCategoryComboBox() {
         ResultSet CategoryResult;
         Statement s;
@@ -384,6 +400,8 @@ public class Ledger extends javax.swing.JDialog {
     }//GEN-LAST:event_AccountsComboBoxActionPerformed
 
     /**
+     * Main.
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -425,6 +443,9 @@ public class Ledger extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 }
 
+/**
+ * The type Ledger list table model.
+ */
 class LedgerListTableModel extends AbstractTableModel {
 
     private String[] columnNames = {"id", "Rec", "Date", "Payee", "Description", "Category", "Amount"};
@@ -432,11 +453,21 @@ class LedgerListTableModel extends AbstractTableModel {
     private String AccountSelected;
     private JLabel TotalLabel;
 
+    /**
+     * Instantiates a new Ledger list table model.
+     *
+     * @param DBConn the db conn
+     */
     public LedgerListTableModel(Connection DBConn) {
         conn = DBConn;
         AccountSelected = "NotAnAccountToday";
     }
 
+    /**
+     * Set total label.
+     *
+     * @param Label the label
+     */
     public void SetTotalLabel(JLabel Label) {
         TotalLabel = Label;
     }
@@ -445,6 +476,11 @@ class LedgerListTableModel extends AbstractTableModel {
         return columnNames.length;
     }
 
+    /**
+     * Set account selected.
+     *
+     * @param Account the account
+     */
     public void SetAccountSelected(String Account) {
         AccountSelected = Account;
     }
@@ -612,6 +648,11 @@ class LedgerListTableModel extends AbstractTableModel {
         }
     }
 
+    /**
+     * Delete ledger.
+     *
+     * @param row the row
+     */
     public void DeleteLedger(int row) {
         Statement s;
         Integer LedgerId;
@@ -634,6 +675,18 @@ class LedgerListTableModel extends AbstractTableModel {
         }
     }
 
+    /**
+     * Add ledger int.
+     *
+     * @param Rec         the rec
+     * @param TDate       the t date
+     * @param Payee       the payee
+     * @param Description the description
+     * @param Category    the category
+     * @param amount      the amount
+     * @param account     the account
+     * @return the int
+     */
 //     private String[] columnNames = {"id", "Rec", "Date", "Payee", "Description", "Category", "Amount"};
     public int AddLedger(int Rec, java.util.Date TDate, String Payee, String Description, String Category, float amount, String account) {
         int ErrorCode = 0;
@@ -663,6 +716,9 @@ class LedgerListTableModel extends AbstractTableModel {
         return ErrorCode;
     }
 
+    /**
+     * Update total label.
+     */
     public void UpdateTotalLabel() {
         ResultSet LedgerResult;
         Statement s;

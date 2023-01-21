@@ -14,19 +14,29 @@ import java.awt.Desktop;
 import java.net.URI;
 
 /**
+ * The type Reports.
  *
- * @author  rovitotv
+ * @author rovitotv
  */
 public class Reports extends javax.swing.JDialog {
 
     private Connection conn = null;
 
-    /** Creates new form Reports */
+    /**
+     * Creates new form Reports  @param parent the parent
+     *
+     * @param modal the modal
+     */
     public Reports(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
 
+    /**
+     * Set db connection.
+     *
+     * @param DBConn the db conn
+     */
     public void SetDBConnection(Connection DBConn) {
         conn = DBConn;
     }
@@ -156,6 +166,8 @@ public class Reports extends javax.swing.JDialog {
     }//GEN-LAST:event_TransactionsByCategoryButtonActionPerformed
 
     /**
+     * Main.
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -184,13 +196,23 @@ public class Reports extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 }
 
+/**
+ * The type Transaction account report.
+ */
 class TransactionAccountReport {
     private Connection conn = null;
     private String StartDate;
     private String EndDate;
     private PrintWriter pw = null;
     private String AccountName;
-    
+
+    /**
+     * Instantiates a new Transaction account report.
+     *
+     * @param DBConn         the db conn
+     * @param StartDateParam the start date param
+     * @param EndDateParam   the end date param
+     */
     public TransactionAccountReport(Connection DBConn, String StartDateParam,
             String EndDateParam) {
         conn = DBConn;
@@ -198,6 +220,10 @@ class TransactionAccountReport {
         EndDate = EndDateParam;
         Run();
     }
+
+    /**
+     * Run.
+     */
     public void Run() {
         try {
             File ReportFile = new File("report.html");
@@ -213,13 +239,19 @@ class TransactionAccountReport {
             e.printStackTrace();
         }
     }
-    
+
+    /**
+     * Make report header.
+     */
     public void MakeReportHeader() {
         pw.println("<html><title>FinanceJ Transaction Report by Account</title>");
         pw.println("<h1>Transaction Report by Account</h1>");
         pw.println("<h2>Start Date:" + StartDate + " End Date:" + EndDate + "</h2>");
     }
-    
+
+    /**
+     * Make report detail.
+     */
     public void MakeReportDetail() {
         ResultSet AccountResult;
         Statement s;
@@ -240,7 +272,10 @@ class TransactionAccountReport {
             }
         }
     }
-    
+
+    /**
+     * Make account detail.
+     */
     public void MakeAccountDetail() {
         ResultSet LedgerResult;
         Statement s;
@@ -280,13 +315,19 @@ class TransactionAccountReport {
             }
         }
     }
-    
+
+    /**
+     * Make report footer.
+     */
     public void MakeReportFooter() {
         pw.println("</html>");
     }
     
 }
 
+/**
+ * The type Transaction category report.
+ */
 class TransactionCategoryReport {
     private Connection conn = null;
     private String StartDate;
@@ -294,7 +335,14 @@ class TransactionCategoryReport {
     private PrintWriter pw = null;
     private String CategoryName;
     private float CategoryBudget = 0;
-    
+
+    /**
+     * Instantiates a new Transaction category report.
+     *
+     * @param DBConn         the db conn
+     * @param StartDateParam the start date param
+     * @param EndDateParam   the end date param
+     */
     public TransactionCategoryReport(Connection DBConn, String StartDateParam,
             String EndDateParam) {
         conn = DBConn;
@@ -302,6 +350,10 @@ class TransactionCategoryReport {
         EndDate = EndDateParam;
         Run();
     }
+
+    /**
+     * Run.
+     */
     public void Run() {
         try {
             File ReportFile = new File("report.html");
@@ -317,13 +369,19 @@ class TransactionCategoryReport {
             e.printStackTrace();
         }
     }
-    
+
+    /**
+     * Make report header.
+     */
     public void MakeReportHeader() {
         pw.println("<html><title>FinanceJ Transaction Report by Category</title>");
         pw.println("<h1>Transaction Report by Category</h1>");
         pw.println("<h2>Start Date:" + StartDate + " End Date:" + EndDate + "</h2>");
     }
-    
+
+    /**
+     * Make report detail.
+     */
     public void MakeReportDetail() {
         ResultSet AccountResult;
         Statement s;
@@ -345,7 +403,10 @@ class TransactionCategoryReport {
             }
         }
     }
-    
+
+    /**
+     * Make account detail.
+     */
     public void MakeAccountDetail() {
         ResultSet LedgerResult;
         Statement s;
@@ -387,7 +448,10 @@ class TransactionCategoryReport {
             }
         }
     }
-    
+
+    /**
+     * Make report footer.
+     */
     public void MakeReportFooter() {
         pw.println("</html>");
     }

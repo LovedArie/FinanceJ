@@ -10,21 +10,31 @@ import javax.swing.table.*;
 import javax.swing.*;
 
 /**
+ * The type Category.
  *
- * @author  rovitotv
+ * @author rovitotv
  */
 public class Category extends javax.swing.JDialog {
 
     private Connection conn = null;
     private CategoryListTableModel dataModel;
 
-    /** Creates new form Category */
+    /**
+     * Creates new form Category  @param parent the parent
+     *
+     * @param modal the modal
+     */
     public Category(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         CategoryListTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
+    /**
+     * Set db connection.
+     *
+     * @param DBConn the db conn
+     */
     public void SetDBConnection(Connection DBConn) {
         conn = DBConn;
         dataModel = new CategoryListTableModel(conn);
@@ -202,6 +212,8 @@ public class Category extends javax.swing.JDialog {
     }//GEN-LAST:event_DeleteCategoryButtonActionPerformed
 
     /**
+     * Main.
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -235,11 +247,19 @@ public class Category extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 }
 
+/**
+ * The type Category list table model.
+ */
 class CategoryListTableModel extends AbstractTableModel {
 
     private String[] columnNames = {"Name", "Description", "Budget"};
     private Connection conn = null;
 
+    /**
+     * Instantiates a new Category list table model.
+     *
+     * @param DBConn the db conn
+     */
     public CategoryListTableModel(Connection DBConn) {
         conn = DBConn;
     }
@@ -346,6 +366,11 @@ class CategoryListTableModel extends AbstractTableModel {
         }
     }
 
+    /**
+     * Delete category.
+     *
+     * @param row the row
+     */
     public void DeleteCategory(int row) {
         Statement s;
         String CategoryName;
@@ -366,6 +391,14 @@ class CategoryListTableModel extends AbstractTableModel {
         }
     }
 
+    /**
+     * Add category int.
+     *
+     * @param Name        the name
+     * @param Description the description
+     * @param budget      the budget
+     * @return the int
+     */
     public int AddCategory(String Name, String Description, float budget) {
         int ErrorCode = 0;
         PreparedStatement psInsert;

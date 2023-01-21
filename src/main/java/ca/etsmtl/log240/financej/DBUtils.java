@@ -20,12 +20,16 @@ under the License.
 import java.io.*;
 import java.sql.*;
 
+/**
+ * The type Db utils.
+ */
 public class DBUtils {
 
     /*****************
-     **  Asks user to enter a wish list item or 'exit' to exit the loop - returns 
-     **       the string entered - loop should exit when the string 'exit' is returned
-     ******************/
+     *  Asks user to enter a wish list item or 'exit' to exit the loop - returns
+     *       the string entered - loop should exit when the string 'exit' is returned
+     * @return the wish item
+     */
     public static String getWishItem() {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String ans = "";
@@ -44,7 +48,10 @@ public class DBUtils {
     }
 
     /**  END  getWishItem  ***/
-    /***      Check for  WISH_LIST table    ****/
+    /***      Check for  WISH_LIST table     @param conTst the con tst
+     * @return the boolean
+     * @throws SQLException the sql exception
+     */
     public static boolean wwdChk4Table(Connection conTst) throws SQLException {
         boolean chk = true;
         boolean doCreate = false;
@@ -70,6 +77,13 @@ public class DBUtils {
         return true;
     }
 
+    /**
+     * Chk table account boolean.
+     *
+     * @param conTst the con tst
+     * @return the boolean
+     * @throws SQLException the sql exception
+     */
     public static boolean ChkTableAccount(Connection conTst) throws SQLException {
         boolean chk = true;
         boolean doCreate = false;
@@ -95,6 +109,13 @@ public class DBUtils {
         return true;
     }
 
+    /**
+     * Chk table category boolean.
+     *
+     * @param conTst the con tst
+     * @return the boolean
+     * @throws SQLException the sql exception
+     */
     public static boolean ChkTableCategory(Connection conTst) throws SQLException {
         boolean chk = true;
         boolean doCreate = false;
@@ -120,6 +141,13 @@ public class DBUtils {
         return true;
     }
 
+    /**
+     * Chk table ledger boolean.
+     *
+     * @param conTst the con tst
+     * @return the boolean
+     * @throws SQLException the sql exception
+     */
     public static boolean ChkTableLedger(Connection conTst) throws SQLException {
         boolean chk = true;
         boolean doCreate = false;
@@ -144,7 +172,12 @@ public class DBUtils {
         //  System.out.println("Just got the warning - table exists OK ");
         return true;
     }
-    
+
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         // This method allows stand-alone testing of the getWishItem method
         String answer;

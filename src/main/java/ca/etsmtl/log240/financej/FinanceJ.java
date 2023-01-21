@@ -12,8 +12,9 @@ import javax.swing.*;
 import java.awt.Color;
 
 /**
+ * The type Finance j.
  *
- * @author  rovitotv
+ * @author rovitotv
  */
 public class FinanceJ extends javax.swing.JFrame {
     // define the driver to use 
@@ -28,8 +29,11 @@ public class FinanceJ extends javax.swing.JFrame {
     private Ledger LedgerDialog;
     private Reports ReportsDialog;
     private AccountTotalTableModel dataModel;
-    
-  public static void LoadDBDriver() {
+
+    /**
+     * Load db driver.
+     */
+    public static void LoadDBDriver() {
         try {
             /*
              **  Load the Derby driver. 
@@ -51,8 +55,11 @@ public class FinanceJ extends javax.swing.JFrame {
 			System.out.println("\n    >>> Illegal Access Exception   <<<\n");
 			e.printStackTrace();
 		}
-    } 
+    }
 
+    /**
+     * Create db connection.
+     */
     public static void CreateDBConnection() {
         try {
             conn = DriverManager.getConnection(connectionURL);
@@ -65,6 +72,9 @@ public class FinanceJ extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Create db tables.
+     */
     public static void CreateDBTables() {
         String CreateStringAccount = "create table account (name varchar(50) primary key, description varchar(250))";
         String CreateStringCategory = "create table category (name varchar(50) primary key, description varchar(250), budget float)";
@@ -93,6 +103,9 @@ public class FinanceJ extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Shutdown db.
+     */
     public static void ShutdownDB() {
         try {
             conn.close();
@@ -120,7 +133,10 @@ public class FinanceJ extends javax.swing.JFrame {
             }
         }
     }
-    
+
+    /**
+     * Update total.
+     */
     public void UpdateTotal() {
         ResultSet LedgerResult;
         Statement s;
@@ -149,8 +165,10 @@ public class FinanceJ extends javax.swing.JFrame {
         }
     
     }
-    
-    /** Creates new form FinanceJ */
+
+    /**
+     * Creates new form FinanceJ
+     */
     public FinanceJ() {
         LoadDBDriver();
         CreateDBConnection();
@@ -366,8 +384,10 @@ public class FinanceJ extends javax.swing.JFrame {
     private void ReportsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReportsButtonActionPerformed
         ReportsDialog.setVisible(true);
 }//GEN-LAST:event_ReportsButtonActionPerformed
-    
+
     /**
+     * Main.
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -390,10 +410,11 @@ public class FinanceJ extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-    //   ## DERBY EXCEPTION REPORTING CLASSES  ## 
     /***     Exception reporting methods
-     **      with special handling of SQLExceptions
-     ***/
+     *      with special handling of SQLExceptions
+     * @param e the e
+     */
+//   ## DERBY EXCEPTION REPORTING CLASSES  ##
     static void errorPrint(Throwable e) {
         if (e instanceof SQLException) {
             SQLExceptionPrint((SQLException) e);
@@ -404,7 +425,12 @@ public class FinanceJ extends javax.swing.JFrame {
 
     }  // END errorPrint 
 
-    //  Iterates through a stack of SQLExceptions 
+    /**
+     * Sql exception print.
+     *
+     * @param sqle the sqle
+     */
+//  Iterates through a stack of SQLExceptions
     static void SQLExceptionPrint(SQLException sqle) {
         while (sqle != null) {
             System.out.println("\n---SQLException Caught---\n");
@@ -419,11 +445,19 @@ public class FinanceJ extends javax.swing.JFrame {
 
 }
 
+/**
+ * The type Account total table model.
+ */
 class AccountTotalTableModel extends AbstractTableModel {
 
     private String[] columnNames = {"Account", "Balance"};
     private Connection conn = null;
 
+    /**
+     * Instantiates a new Account total table model.
+     *
+     * @param DBConn the db conn
+     */
     public AccountTotalTableModel(Connection DBConn) {
         conn = DBConn;
     }
