@@ -48,6 +48,7 @@ public class Reports extends javax.swing.JDialog {
         TransactionsByCategoryButton = new javax.swing.JButton();
 
         setModal(true);
+        setTitle("Reports");
 
         jLabel1.setText("Start Date:");
 
