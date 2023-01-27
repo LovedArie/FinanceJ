@@ -179,10 +179,12 @@ public class Category extends javax.swing.JDialog {
     private void AddCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCategoryButtonActionPerformed
         int ReturnCode;
         String BudgetValue;
-        float Budget;
-        
+        float Budget = 1000f;
+
         BudgetValue = BudgetTextField.getText();
-        Budget = Float.valueOf(BudgetValue.trim()).floatValue();
+        if(BudgetValue.isEmpty()==false)
+            Budget = Float.valueOf(BudgetValue.trim()).floatValue();
+        System.out.println("Test budget : " + Budget);
         
         ReturnCode = dataModel.AddCategory(NameTextField.getText(), DescriptionTextField.getText(), Budget);
         if (ReturnCode == 0) {
@@ -191,7 +193,7 @@ public class Category extends javax.swing.JDialog {
             BudgetTextField.setText("");
         } else {
             JOptionPane.showMessageDialog(this,
-                    "Error Adding category to database.  Make sure the category name you specified does not already exist.",
+                    "Error Adding category to database.  Make sure the category name you specified does not already exist or is empty.\nAlso make sure that the budget is filled.",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
 }//GEN-LAST:event_AddCategoryButtonActionPerformed
@@ -404,13 +406,16 @@ class CategoryListTableModel extends AbstractTableModel {
         PreparedStatement psInsert;
 
         try {
-            psInsert = conn.prepareStatement("insert into category(name, description, budget) values(?,?,?)");
-            psInsert.setString(1, Name);
-            psInsert.setString(2, Description);
-            psInsert.setFloat(3, budget);
+            if(Name.isEmpty()==false){
+                psInsert = conn.prepareStatement("insert into category(name, description, budget) values(?,?,?)");
+                psInsert.setString(1, Name);
+                psInsert.setString(2, Description);
+                psInsert.setFloat(3, budget);
 
-            psInsert.executeUpdate();
-            fireTableRowsInserted(getRowCount() + 1, getRowCount() + 1);
+                psInsert.executeUpdate();
+                fireTableRowsInserted(getRowCount() + 1, getRowCount() + 1);
+            } else
+                throw new Throwable("Nom vide");
         } catch (Throwable e) {
             System.out.println(" . . . exception thrown: AddCategory");
             e.printStackTrace();
