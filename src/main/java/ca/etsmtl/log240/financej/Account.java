@@ -202,7 +202,7 @@ public class Account extends javax.swing.JDialog {
             DescriptionTextField.setText("");
         } else {
             JOptionPane.showMessageDialog(this,
-                    "Error Adding account to database.  Make sure the account name you specified does not already exist.",
+                    "Error Adding account to database.  Make sure the account name you specified does not already exist or is empty.",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_AddAccountButtonActionPerformed
@@ -388,12 +388,15 @@ class AccountListTableModel extends AbstractTableModel {
         PreparedStatement psInsert;
 
         try {
-            psInsert = conn.prepareStatement("insert into account(name, description) values(?,?)");
-            psInsert.setString(1, Name);
-            psInsert.setString(2, Description);
+            if(Name.isEmpty()==false){
+                psInsert = conn.prepareStatement("insert into account(name, description) values(?,?)");
+                psInsert.setString(1, Name);
+                psInsert.setString(2, Description);
 
-            psInsert.executeUpdate();
-            fireTableRowsInserted(getRowCount() + 1, getRowCount() + 1);
+                psInsert.executeUpdate();
+                fireTableRowsInserted(getRowCount() + 1, getRowCount() + 1);
+            } else
+                throw new Throwable();
         } catch (Throwable e) {
             System.out.println(" . . . exception thrown: AddAccount");
             e.printStackTrace();
