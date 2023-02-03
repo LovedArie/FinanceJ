@@ -315,11 +315,13 @@ public class Ledger extends javax.swing.JDialog {
         String TdateString;
         String TCat;
 
-        // get the amount field and format it properly
+        /**
+         * On lance ici une exception lorsque l'on essaye de récupérer le texte contenu dans la méthode getText() de la variable AmountTextField et que celle ci n'est pas au bon format.
+        */
         try {
             AmountValue = AmountTextField.getText();
             Amount = Float.valueOf(AmountValue.trim()).floatValue();
-        } catch (Throwable e) {
+        } catch (NumberFormatException e) {
             System.out.println("...exception thrown: in AddTransactionButtonActionPerformed");
             e.printStackTrace();
             JOptionPane.showMessageDialog(this,
