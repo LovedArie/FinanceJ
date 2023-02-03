@@ -316,8 +316,17 @@ public class Ledger extends javax.swing.JDialog {
         String TCat;
 
         // get the amount field and format it properly
-        AmountValue = AmountTextField.getText();
-        Amount = Float.valueOf(AmountValue.trim()).floatValue();
+        try {
+            AmountValue = AmountTextField.getText();
+            Amount = Float.valueOf(AmountValue.trim()).floatValue();
+        } catch (Throwable e) {
+            System.out.println("...exception thrown: in AddTransactionButtonActionPerformed");
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this,
+                    "Error parsing amount. You must choose an amount.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         // get the rec field and format it properly
         boolean RecBool = RecCheckBox.isSelected();

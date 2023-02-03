@@ -15,3 +15,6 @@ derby.log
 .idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml
 .idea/libraries/Maven__org_apache_derby_derby_10_11_1_1.xml
 .idea/libraries/Maven__junit_junit_4_11.xml
+report.html
+.idea/compiler.xml
+.idea/compiler.xml
