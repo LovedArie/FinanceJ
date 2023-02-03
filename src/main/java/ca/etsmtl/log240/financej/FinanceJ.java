@@ -30,6 +30,8 @@ public class FinanceJ extends javax.swing.JFrame {
     private Reports ReportsDialog;
     private AccountTotalTableModel dataModel;
 
+    private Login loginDialog;
+
     /**
      * Load db driver.
      */
@@ -393,7 +395,7 @@ public class FinanceJ extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FinanceJ().setVisible(true);
+                new Login().setVisible(true);
             }
         });
     }
