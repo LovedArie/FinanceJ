@@ -30,6 +30,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
+
     public Login() {
         initComponents();
     }
@@ -43,25 +44,38 @@ public class Login extends javax.swing.JFrame {
         title.setHorizontalAlignment(SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 22));
 
-         usernameLabel = new JLabel("Nom d'utilisateur : ");
-         usernameField = new JTextField(20);
+        usernameLabel = new JLabel("Nom d'utilisateur : ");
+        usernameField = new JTextField(20);
         passwordLabel = new JLabel("Mot de passe : ");
-         passwordField = new JPasswordField(20);
-         loginButton = new JButton("Connexion");
+        passwordField = new JPasswordField(20);
+        loginButton = new JButton("Connexion");
 
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String username = usernameField.getText();
                 String password = new String(passwordField.getPassword());
                 //create variable passHash in md5 via password
-                String passHash = getMd5(password);
-
-                if (username.equals("admin") && passHash.equals("21232f297a57a5a743894a0e4a801fc3")) {
-                    frame.dispose();
-                    new FinanceJ().setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(frame, "Nom d'utilisateur ou mot de passe incorrect", "Erreur", JOptionPane.ERROR_MESSAGE);
+                String passHash = XMLTools.getMd5(password);
+                //check in FinanceJ.users if username and passHash are correct
+                for (User user : FinanceJ.users) {
+                    if (user.getUsername().equals(username) && user.getPassword().equals(passHash)) {
+                        frame.dispose();
+                        new FinanceJ(username).setVisible(true);
+                        System.out.println("Login successful");
+                        return;
+                    }
                 }
+                if (username.equals("") || password.equals("")){
+                    JOptionPane.showMessageDialog(frame, "Veuillez remplir tous les champs", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    return;
+                } else if (username.equals("admin") && passHash.equals("21232f297a57a5a743894a0e4a801fc3")) {
+                    frame.dispose();
+                    new FinanceJ(username).setVisible(true);
+                    System.out.println("Login successful");
+                    return;
+                }
+                JOptionPane.showMessageDialog(frame, "Nom de'utilisateur ou mot de passe incorrect", "Erreur", JOptionPane.ERROR_MESSAGE);
+
             }
         });
 
@@ -97,35 +111,9 @@ public class Login extends javax.swing.JFrame {
 
         // Centrer la fenêtre sur l'écran
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+        frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);
 
         frame.setVisible(true);
     }
-    public static String getMd5(String input)
-    {
-        try {
 
-            // Static getInstance method is called with hashing MD5
-            MessageDigest md = MessageDigest.getInstance("MD5");
-
-            // digest() method is called to calculate message digest
-            // of an input digest() return array of byte
-            byte[] messageDigest = md.digest(input.getBytes());
-
-            // Convert byte array into signum representation
-            BigInteger no = new BigInteger(1, messageDigest);
-
-            // Convert message digest into hex value
-            String hashtext = no.toString(16);
-            while (hashtext.length() < 32) {
-                hashtext = "0" + hashtext;
-            }
-            return hashtext;
-        }
-
-        // For specifying wrong message digest algorithms
-        catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
