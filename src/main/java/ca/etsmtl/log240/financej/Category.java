@@ -5,6 +5,7 @@ package ca.etsmtl.log240.financej;
  * Created on March 9, 2008, 6:03 PM
  */
 
+import java.awt.*;
 import java.sql.*;
 import javax.swing.table.*;
 import javax.swing.*;
@@ -175,6 +176,9 @@ public class Category extends javax.swing.JDialog {
         );
 
         pack();
+        // Center the frame on the screen
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        setLocation(dim.width / 2 - getSize().width / 2, dim.height / 2 - getSize().height / 2);
     }// </editor-fold>//GEN-END:initComponents
     private void AddCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCategoryButtonActionPerformed
         int ReturnCode;

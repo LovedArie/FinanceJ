@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Users>
+  <User>
+    <Username>client1</Username>
+    <Password>a165dd3c2e98d5d607181d0b87a4c66b</Password>
+    <Role>Advanced User</Role>
+  </User>
+  <User>
+    <Username>client2</Username>
+    <Password>2c66045d4e4a90814ce9280272e510ec</Password>
+    <Role>Normal User</Role>
+  </User>
+</Users>

@@ -5,11 +5,10 @@ package ca.etsmtl.log240.financej;
  * Created on March 17, 2008, 11:54 PM
  */
 
+import java.awt.*;
 import java.sql.*;
 
 import java.io.*;
-
-import java.awt.Desktop;
 
 import java.net.URI;
 
@@ -129,6 +128,9 @@ public class Reports extends javax.swing.JDialog {
         );
 
         pack();
+        // Center the frame on the screen
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        setLocation(dim.width / 2 - getSize().width / 2, dim.height / 2 - getSize().height / 2);
     }// </editor-fold>//GEN-END:initComponents
     private void TransactionsByAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransactionsByAccountButtonActionPerformed
         
