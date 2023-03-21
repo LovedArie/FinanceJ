@@ -19,9 +19,11 @@ public abstract class FinancejAbstractTest extends UISpecTestCase {
         super.setUp();
         setAdapter(new MainClassAdapter(FinanceJ.class));
         Window window = getMainWindow();
-        usernameField = window.getTextBox("usernameField");
-        passwordField = window.getPasswordField("passwordField");
-        loginButton = window.getButton("loginButton");
+        usernameField = window.getTextBox("USERNAME_TEXT_FIELD");
+        usernameField.setText("client1");
+        passwordField = window.getPasswordField("PASSWORD_PASSWORD_FIELD");
+        passwordField.setPassword("client1");
+        loginButton = window.getButton("Connexion");
         /*ledgerTable = window.getTable();
         ledgerButton = window.getButton("Ledger");
         categoriesButton = window.getButton("Categories");
