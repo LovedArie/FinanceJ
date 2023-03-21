@@ -8,24 +8,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="corretto-1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES />
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/Downloads/UISpec4J-2.4.zip!/UISpec4J-2.4/addressbook/src/main/java" />
-          <root url="jar://$USER_HOME$/Downloads/UISpec4J-2.4.zip!/UISpec4J-2.4/addressbook/src/test/java" />
-          <root url="jar://$USER_HOME$/Downloads/UISpec4J-2.4.zip!/UISpec4J-2.4/calculator/src/main/java" />
-          <root url="jar://$USER_HOME$/Downloads/UISpec4J-2.4.zip!/UISpec4J-2.4/calculator/src/test/java" />
-          <root url="jar://$USER_HOME$/Downloads/UISpec4J-2.4.zip!/UISpec4J-2.4/uispec4j/src/main/java" />
-          <root url="jar://$USER_HOME$/Downloads/UISpec4J-2.4.zip!/UISpec4J-2.4/uispec4j/src/main/java-jdk15" />
-          <root url="jar://$USER_HOME$/Downloads/UISpec4J-2.4.zip!/UISpec4J-2.4/uispec4j/src/main/java-jdk16" />
-          <root url="jar://$USER_HOME$/Downloads/UISpec4J-2.4.zip!/UISpec4J-2.4/uispec4j/src/test/java" />
-        </SOURCES>
-      </library>
-    </orderEntry>
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.11" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.uispec4j:uispec4j:jdk8:2.5-RC1" level="project" />
