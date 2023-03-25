@@ -5,13 +5,11 @@ import org.junit.Test;
 public abstract class FinancejAbstractTest extends UISpecTestCase {
     /*protected Table ledgerTable;
     protected Button ledgerButton;
-    protected Button categoriesButton;
-    protected Button accountsButton;
-    protected Button reportsButton;
-    protected Button exitButton;*/
+    protected Button reportsButton;*/
     protected TextBox usernameField;
     protected PasswordField passwordField;
     protected Button loginButton;
+    protected Button exitButton;
     static {
         UISpec4J.init();
     }
@@ -24,16 +22,6 @@ public abstract class FinancejAbstractTest extends UISpecTestCase {
         passwordField = window.getPasswordField("PASSWORD_PASSWORD_FIELD");
         passwordField.setPassword("client1");
         loginButton = window.getButton("Connexion");
-        /*ledgerTable = window.getTable();
-        ledgerButton = window.getButton("Ledger");
-        categoriesButton = window.getButton("Categories");
-        accountsButton = window.getButton("Accounts");
-        reportsButton = window.getButton("Reports");
-        exitButton = window.getButton("Exit");*/
         UISpec4J.setWindowInterceptionTimeLimit(100);
-    }
-    protected void tearDown() throws Exception {
-        //exitButton.click();
-        super.tearDown();
     }
 }

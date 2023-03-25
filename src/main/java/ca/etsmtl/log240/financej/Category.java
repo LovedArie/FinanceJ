@@ -58,8 +58,11 @@ public class Category extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         AddCategoryButton = new javax.swing.JButton();
         NameTextField = new javax.swing.JTextField();
+        NameTextField.setName("NAME_TEXT_FIELD");
         DescriptionTextField = new javax.swing.JTextField();
+        DescriptionTextField.setName("DESCRIPTION_TEXT_FIELD");
         BudgetTextField = new javax.swing.JTextField();
+        BudgetTextField.setName("BUDGET_TEXT_FIELD");
         jScrollPane1 = new javax.swing.JScrollPane();
         CategoryListTable = new javax.swing.JTable();
 
