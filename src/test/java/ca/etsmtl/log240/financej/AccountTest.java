@@ -9,15 +9,15 @@ public class AccountTest extends FinancejAbstractTest {
     protected Button accountsButton;
 
 
-//    protected void setUp() throws Exception {
-//        super.setUp();
-//        loginButton.click();
-//        accountsButton = getMainWindow().getButton("Comptes");
-//        accountsButton.click();
-//    }
+    protected void setUp() throws Exception {
+        super.setUp();
+
+        accountsButton = getMainWindow().getButton("Comptes");
+        accountsButton.click();
+    }
 
 
-
+    @Test
     public void testAddingAndDeletingAccount() throws Exception {
     /* Voici comment traiter une fenêtre modale avec uispec4j.
      * Voir "Intercepting windows and dialogs" dans la documentation en ligne.
@@ -36,6 +36,7 @@ public class AccountTest extends FinancejAbstractTest {
                     accountsTable = window.getTable();
                     int initialRowCount = accountsTable.getRowCount();
 
+                    // delete all rows with the specified name if they exist
                     if (initialRowCount > 0) {
                         for (int i = 0; i < initialRowCount; i++) {
                             // select the first row with the specified name and delete it
@@ -44,8 +45,6 @@ public class AccountTest extends FinancejAbstractTest {
                         }
 
                     }
-                    // delete all rows with the specified name
-
 
                     if (accountsTable.getRowCount() == 0) {
                         System.out.println("Account1---->"+accountsTable);
