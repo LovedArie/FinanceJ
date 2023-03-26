@@ -33,6 +33,7 @@ public abstract class FinancejAbstractTest extends UISpecTestCase {
         UISpec4J.setWindowInterceptionTimeLimit(100);
     }
 
+    //closing connection to database
     protected void tearDown() throws Exception {
         exitButton.click();
         super.tearDown();
