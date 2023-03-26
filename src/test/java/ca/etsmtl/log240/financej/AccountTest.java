@@ -1,6 +1,11 @@
 package ca.etsmtl.log240.financej;
+import com.sun.org.apache.xpath.internal.operations.Equals;
+import org.junit.After;
+import org.junit.Before;
 import org.uispec4j.*;
 import org.uispec4j.interception.*;
+
+import java.util.Arrays;
 import java.util.Random;
 import org.junit.Test;
 public class AccountTest extends FinancejAbstractTest {
@@ -8,76 +13,95 @@ public class AccountTest extends FinancejAbstractTest {
     private Trigger ret;
     protected Button accountsButton;
 
-
+    @Before
     protected void setUp() throws Exception {
         super.setUp();
-
-        accountsButton = getMainWindow().getButton("Comptes");
-        accountsButton.click();
     }
+
+    @After
+    protected void tearDown() throws Exception {
+        super.tearDown();
+    }
+
 
 
     @Test
     public void testAddingAndDeletingAccount() throws Exception {
-    /* Voici comment traiter une fenêtre modale avec uispec4j.
-     * Voir "Intercepting windows and dialogs" dans la documentation en ligne.
-     */
-    WindowInterceptor.init(loginButton.triggerClick()).process(new WindowHandler() {
-        public Trigger process(Window window) {
-            exitButton = window.getButton("Exit");
-            accountsButton = window.getButton("Accounts");
-            final String name = getRandomName();
+        /* Voici comment traiter une fenêtre modale avec uispec4j.
+         * Voir "Intercepting windows and dialogs" dans la documentation en ligne.
+         */
+        WindowInterceptor.init(loginButton.triggerClick()).process(new WindowHandler() {
+            public Trigger process(Window window) {
+                exitButton = window.getButton("Exit");
+                accountsButton = window.getButton("Accounts");
 
-            WindowInterceptor.init(accountsButton.triggerClick()).process(new WindowHandler() {
 
-                @Override
-                public Trigger process(Window window) throws Exception {
+                WindowInterceptor.init(accountsButton.triggerClick()).process(new WindowHandler() {
 
-                    accountsTable = window.getTable();
-                    int initialRowCount = accountsTable.getRowCount();
+                    public Trigger process(Window window) throws Exception {
 
-                    // delete all rows with the specified name if they exist
-                    if (initialRowCount > 0) {
-                        for (int i = 0; i < initialRowCount; i++) {
-                            // select the first row with the specified name and delete it
-                            accountsTable.selectRow(i);
-                            window.getButton("Delete Account").click();
+                        accountsTable = window.getTable();
+                        int rowCount = accountsTable.getRowCount();
+
+                        // delete all rows if they exist
+                        if (rowCount > 0) {
+                            for (int i = 0; i < rowCount; i++) {
+                                // select the first row with the specified name and delete it
+                                accountsTable.selectRow(i);
+                                window.getButton("Delete Account").click();
+                            }
+                            rowCount=accountsTable.getRowCount();
+
                         }
 
+                        if (accountsTable.getRowCount() == 0) {
+                            System.out.println("Account table before adding the account---->"+accountsTable.toString());
+                            // ajouter un compte
+                            String name;
+                            name = getRandomName();
+                            String description= "Savings";
+
+                            window.getTextBox("NAME_TEXT_FIELD").setText(name);
+                            window.getTextBox("DESCRIPTION_TEXT_FIELD").setText(description);
+                            window.getButton("Add Account").click();
+
+                            System.out.println("Account table after adding the account---->"+accountsTable.toString());
+
+
+                            // Create the expectedTable array
+                            String[][] expectedTable = new String[][] { { name, description } };
+
+
+                            // vérifier que le compte a été ajouté
+                            assertEquals(accountsTable.getRowCount(), rowCount+1);
+
+                            // vérifier que la table de données est correcte
+                            window.getTable().contentEquals(expectedTable);
+
+                            // supprimer le compte cree precedemment en cherchant le nom
+                            accountsTable.selectRowsWithText(0, name);
+                            window.getButton("Delete Account").click();
+
+                            System.out.println("Account table after deleting the account---->"+accountsTable.toString());
+
+                            // vérifier que le compte a été supprimé
+                            assertEquals(accountsTable.getRowCount(), rowCount);
+
+                            // retourner un "trigger" qui ferme la fenêtre modale
+                            ret = window.getButton("Close").triggerClick();
+
+                        }
+
+                        return window.getButton("Close").triggerClick();
                     }
-
-                    if (accountsTable.getRowCount() == 0) {
-                        System.out.println("Account1---->"+accountsTable);
-                        // ajouter un compte
-                        window.getTextBox("NAME_TEXT_FIELD").setText(name);
-                        window.getTextBox("DESCRIPTION_TEXT_FIELD").setText("Savings");
-                        window.getButton("Add Account").click();
-                        System.out.println("Account1---->"+accountsTable);
-                        assertEquals(accountsTable.getRowCount(), initialRowCount+1);
-                        // supprimer le compte cree precedemment en cherchant le nom
-                        accountsTable.selectRowsWithText(0, name);
-                        window.getButton("Delete Account").click();
-
-                        assertEquals(accountsTable.getRowCount(), initialRowCount);
-
-                        // retourner un "trigger" qui ferme la fenêtre modale
-                        ret = window.getButton("Close").triggerClick();
-
-                    }
-
-                    return window.getButton("Close").triggerClick();
-                }
-            }).run();
-            return ret;
-        }
-    }).run();
-}
-
-
-
-    protected void tearDown() throws Exception {
-        super.tearDown();
+                }).run();
+                return ret;
+            }
+        }).run();
     }
+
+
+
 
 
     public static String getRandomName() {
