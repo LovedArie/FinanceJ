@@ -382,6 +382,24 @@ class AccountListTableModel extends AbstractTableModel {
         }
     }
 
+    public void DeleteAllAccounts() {
+        Statement s;
+        String SQLString;
+
+        if (conn != null) {
+            try {
+                s = conn.createStatement();
+                SQLString = "DELETE FROM account";
+                System.out.println(SQLString);
+                s.executeUpdate(SQLString);
+                fireTableDataChanged();
+            } catch (Throwable e) {
+                System.out.println(" . . . exception thrown: in AccountListTableModel DeleteAllAccounts");
+                e.printStackTrace();
+            }
+        }
+    }
+
     /**
      * Add account int.
      *
