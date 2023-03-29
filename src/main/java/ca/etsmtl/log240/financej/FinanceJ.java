@@ -183,39 +183,39 @@ public class FinanceJ extends javax.swing.JFrame {
     public FinanceJ(String role) {
         AppAccountName = role;
         AppAccountAuthorisation = XMLTools.getUserAuthorisation(role);
-                LoadDBDriver();
-                CreateDBConnection();
-                CreateDBTables();
+        LoadDBDriver();
+        CreateDBConnection();
+        CreateDBTables();
 
-                initComponents(role);
+        initComponents(role);
 
-                LedgerDialog = new Ledger(this, true);
-                LedgerDialog.setVisible(false);
-                LedgerDialog.SetDBConnection(conn);
+        LedgerDialog = new Ledger(this, true);
+        LedgerDialog.setVisible(false);
+        LedgerDialog.SetDBConnection(conn);
 
-                AccountDialog = new Account(this, true);
-                AccountDialog.setVisible(false);
-                AccountDialog.SetDBConnection(conn);
+        AccountDialog = new Account(this, true);
+        AccountDialog.setVisible(false);
+        AccountDialog.SetDBConnection(conn);
 
-                AppAccountDialog = new AppAccount(this, true);
-                AccountDialog.setVisible(false);
-                AccountDialog.SetDBConnection(conn);
+        AppAccountDialog = new AppAccount(this, true);
+        AccountDialog.setVisible(false);
+        AccountDialog.SetDBConnection(conn);
 
-                CategoryDialog = new Category(this, true);
-                CategoryDialog.setVisible(false);
-                CategoryDialog.SetDBConnection(conn);
+        CategoryDialog = new Category(this, true);
+        CategoryDialog.setVisible(false);
+        CategoryDialog.SetDBConnection(conn);
 
-                ReportsDialog = new Reports(this, true);
-                ReportsDialog.setVisible(false);
-                ReportsDialog.SetDBConnection(conn);
+        ReportsDialog = new Reports(this, true);
+        ReportsDialog.setVisible(false);
+        ReportsDialog.SetDBConnection(conn);
 
-                dataModel = new AccountTotalTableModel(conn);
-                AccountTotalTable.setModel(dataModel);
-                AccountTotalTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        dataModel = new AccountTotalTableModel(conn);
+        AccountTotalTable.setModel(dataModel);
+        AccountTotalTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-                UpdateTotal();
+        UpdateTotal();
 
-                this.setTitle("FinanceJ - " + AppAccountName + " - " + XMLTools.getUserRole(AppAccountName));
+        this.setTitle("FinanceJ - " + AppAccountName + " - " + XMLTools.getUserRole(AppAccountName));
     }
 
     /** This method is called from within the constructor to
@@ -445,8 +445,11 @@ public class FinanceJ extends javax.swing.JFrame {
     public static void main(String args[]) {
         users = xmlTools.parseXML();
         java.awt.EventQueue.invokeLater(new Runnable() {
+            //LoginDialog.setVisible(true);
             public void run() {
-                //LoginDialog.setVisible(true);
+                new FinanceJ("admin").setVisible(true);
+
+
             }
         });
     }
