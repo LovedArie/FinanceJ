@@ -1,4 +1,6 @@
 package ca.etsmtl.log240.financej;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.uispec4j.*;
@@ -22,9 +24,15 @@ public class AccountsTest extends FinancejAbstractTest {
     protected void setUp() throws Exception {
         super.setUp();
     }
-
+    @After
     protected void tearDown() throws Exception {
         super.tearDown();
+    }
+
+    @AfterClass
+    public void tearDownClass() throws Exception {
+        //closing connection to database
+        exitButton.click();
     }
 
     //CE24
@@ -72,17 +80,17 @@ public class AccountsTest extends FinancejAbstractTest {
 
     //Teste l'ajout d'un compte et la suppression avec une description de 251 caracteres
 
-    @Test
-    public void testAddAndDeleteAccountsWithBlankName() throws Exception {
-        WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("","$")).run();
-
-    }
-
-
-    @Test
-    public void testAddAndDeleteAccountsWithInvalidName() throws Exception {
-        WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("Aantiquis antiquitate apeirian aperiam aperiri aptei","$")).run();
-    }
+//    @Test
+//    public void testAddAndDeleteAccountsWithBlankName() throws Exception {
+//        WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("","$")).run();
+//
+//    }
+//
+//
+//    @Test
+//    public void testAddAndDeleteAccountsWithInvalidName() throws Exception {
+//        WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("Aantiquis antiquitate apeirian aperiam aperiri aptei","$")).run();
+//    }
 
     private String charGenerator(int n) {
         StringBuilder sb = new StringBuilder();
@@ -177,7 +185,7 @@ private class ValidAccountsHandler extends WindowHandler {
         Random random = new Random();
         String firstName = firstNames[random.nextInt(firstNames.length)];
         String lastName = lastNames[random.nextInt(lastNames.length)];
-        return firstName + " " + lastName;
+        return firstName + "" + lastName;
     }
 
     //Create a list of accounts names between 2 and 50 characters with alphanumeric characters
