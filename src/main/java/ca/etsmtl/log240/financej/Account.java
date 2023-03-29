@@ -412,7 +412,7 @@ class AccountListTableModel extends AbstractTableModel {
         PreparedStatement psInsert;
 
         try {
-            if(Name.isEmpty()==false){
+            if(Name.isEmpty()==false && Name.matches("[a-zA-Z0-9]+")){
                 psInsert = conn.prepareStatement("insert into account(name, description) values(?,?)");
                 psInsert.setString(1, Name);
                 psInsert.setString(2, Description);
