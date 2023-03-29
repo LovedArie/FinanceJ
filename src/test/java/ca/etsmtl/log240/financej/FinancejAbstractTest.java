@@ -42,6 +42,16 @@ public abstract class FinancejAbstractTest extends UISpecTestCase {
         }
     }
 
+    private class CategoriesHandler extends WindowHandler {
+        @Override
+        public Trigger process(Window window) throws Exception {
+            exitButton = window.getButton("Exit");
+            categoriesButton = window.getButton("Categories");
+            System.out.println("CategoriesHandler");
+            return categoriesButton.triggerClick();
+        }
+    }
+
     //closing connection to database
     protected void tearDown() throws Exception {
 //        exitButton.click();

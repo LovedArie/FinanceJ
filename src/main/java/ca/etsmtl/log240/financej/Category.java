@@ -413,7 +413,7 @@ class CategoryListTableModel extends AbstractTableModel {
         PreparedStatement psInsert;
 
         try {
-            if(Name.isEmpty()==false){
+            if(Name.isEmpty()==false && Description.isEmpty()==false){
                 psInsert = conn.prepareStatement("insert into category(name, description, budget) values(?,?,?)");
                 psInsert.setString(1, Name);
                 psInsert.setString(2, Description);
