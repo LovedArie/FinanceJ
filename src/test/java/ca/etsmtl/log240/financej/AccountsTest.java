@@ -64,13 +64,43 @@ public class AccountsTest extends FinancejAbstractTest {
     }
 
     @Test
-    public void test013() throws Exception {
-        WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("Te;!!!!","Savings")).run();
+    public void testAddAccount() throws Exception {
+        WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("Te","$AAAAA")).run();
     }
 
 
 
     //Teste l'ajout d'un compte et la suppression avec une description de 251 caracteres
+
+    @Test
+    public void testAddAndDeleteAccountsWithBlankName() throws Exception {
+        WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("","$")).run();
+
+    }
+
+
+    @Test
+    public void testAddAndDeleteAccountsWithInvalidName() throws Exception {
+        WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("Aantiquis antiquitate apeirian aperiam aperiri aptei","$")).run();
+    }
+
+    private String charGenerator(int n) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            sb.append('a');
+        }
+        return sb.toString();
+    }
+
+
+    //Teste l'ajout d'un compte et la suppression avec un nom de 51 caracteres
+
+    //Teste l'ajout d'un compte et la suppression avec un nom de 1 caractere
+
+    //Teste l'ajout d'un compte et la suppression avec un nom vide
+
+
+
 
 
 
