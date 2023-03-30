@@ -53,16 +53,26 @@ public class ValidFieldsGenerator {
         return firstName + "" + lastName;
     }
 
-    public static Date getRandomDate() {
+    public static Date getValidRandomDate() {
         // return random day beetwen 1 and 31
         // return random month beetwen 1 and 12
         // return random year beetwen -9999 and 9999
-        int day = ThreadLocalRandom.current().nextInt(1, 31 + 1);
-        int month = ThreadLocalRandom.current().nextInt(1, 12 + 1);
-        int year = ThreadLocalRandom.current().nextInt(-9999, 9999 + 1);
+        int day;
+        int month;
+        int year;
+        boolean bool = true;
+        Date date = new Date();
+        while (bool) {
+            day = ThreadLocalRandom.current().nextInt(1, 31 + 1);
+            month = ThreadLocalRandom.current().nextInt(1, 12 + 1);
+            year = ThreadLocalRandom.current().nextInt(-9999, 9999 + 1);
+            date.setDate(day);date.setMonth(month);date.setYear(year);
+            if(checkIfDateIsValid(date))
+                bool = false;
+        }
         // print date format AAAA-MM-JJ
         //System.out.println("Date: " + year + "-" + month + "-" + day);
-        return new Date(year, month, day);
+        return date;
     }
 
     public static boolean checkIfDateIsValid(Date date) {
