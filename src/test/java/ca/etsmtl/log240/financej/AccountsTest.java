@@ -122,10 +122,6 @@ private class ValidAccountsHandler extends WindowHandler {
         this.description = description;
     }
 
-    public ValidAccountsHandler() {
-
-    }
-
     public Trigger process(Window window) throws Exception {
         testAccount(window, name, description);
         ret = window.getButton("Close").triggerClick();
@@ -134,7 +130,7 @@ private class ValidAccountsHandler extends WindowHandler {
 
     //Vérifie si le compte est bien ajouté et s'il est bien supprimé
     private void testAccount(Window window, String name, String description) throws Exception {
-        accountsNomsAlphaNum= ValidFieldsGenerator.generateValidAccountNames();;
+        accountsNomsAlphaNum = ValidFieldsGenerator.generateValidAccountNames();;
         descriptionsValides = ValidFieldsGenerator.generateValidDescriptions();
 
         accountsTable = window.getTable();

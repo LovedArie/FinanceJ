@@ -15,6 +15,7 @@ public abstract class FinancejAbstractTest extends UISpecTestCase {
     protected Button reportsButton;
     protected Button exitButton;
     protected Table accountsTable;
+    protected Table categoriesTable;
 
 
     static {
