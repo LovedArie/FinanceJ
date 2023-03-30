@@ -65,6 +65,26 @@ public class ValidFieldsGenerator {
         return descriptions;
     }
 
+    //generate a list of 100 invalid descriptions (empty, less than 1 characters, more than 251 to 400 characters, or with non-printable characters)
+    // use a random number generator to generate the length of the invalid descriptions (between 0 and 100)
+    // every random descriptions must have between 251 and 400 characters
+    // every random descriptions must have specials characters (!@#$%^&*()_+{}|:"<>?[]\;',./) except empty one
+    public static List<String> generateInvalidDescriptions() {
+        List<String> invalidDescriptions = new ArrayList<>();
+        Random random = new Random();
+        int length = random.nextInt(500-251) +251;
+        for (int i = 0; i < length; i++) {
+            StringBuilder sb = new StringBuilder();
+            for (int j = 0; j < length; j++) {
+                //Append random specials character (!@#$%^&*()_+{}|:"<>?[]\;',./) to description of account
+                char randomChar = (char) ThreadLocalRandom.current().nextInt(33, 47 + 1); // limit to ASCII printable characters
+            }
+            invalidDescriptions.add(sb.toString());
+        }
+        return invalidDescriptions;
+    }
+
+
     //Create a list of budget between Double.MIN_VALUE and Double.MAX_VALUE
     public static List<Double> generateValidBudgets() {
         List<Double> budgets = new ArrayList<>();
