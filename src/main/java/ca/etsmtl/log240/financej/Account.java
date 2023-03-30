@@ -412,7 +412,7 @@ class AccountListTableModel extends AbstractTableModel {
         PreparedStatement psInsert;
 
         try {
-            if(Name.isEmpty()==false && Name.matches("[a-zA-Z0-9]+")){
+            if(!Name.isEmpty() && Name.matches("[a-zA-Z0-9]+") && Name.length() <= 50){
                 psInsert = conn.prepareStatement("insert into account(name, description) values(?,?)");
                 psInsert.setString(1, Name);
                 psInsert.setString(2, Description);
@@ -420,7 +420,7 @@ class AccountListTableModel extends AbstractTableModel {
                 psInsert.executeUpdate();
                 fireTableRowsInserted(getRowCount() + 1, getRowCount() + 1);
             } else
-                throw new Throwable();
+                throw new Throwable("name is empty or contains illegal characters");
         } catch (Throwable e) {
             System.out.println(" . . . exception thrown: AddAccount");
             e.printStackTrace();
