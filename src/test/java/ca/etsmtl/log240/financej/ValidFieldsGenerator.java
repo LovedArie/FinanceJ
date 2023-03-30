@@ -142,7 +142,7 @@ public class ValidFieldsGenerator {
         List<String> descriptions = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             StringBuilder sb = new StringBuilder();
-            int length = ThreadLocalRandom.current().nextInt(1, 100 + 1);
+            int length = ThreadLocalRandom.current().nextInt(0, 300 + 1);
             for (int j = 0; j < length; j++) {
                 //Append special character (!, @, #, $, %, ^, &, *, (, ), _, +, =, {, }, [, ], |, :, ;, ', ", <, >, ?, /, \)
                 sb.append((char) ThreadLocalRandom.current().nextInt(33, 47 + 1));
