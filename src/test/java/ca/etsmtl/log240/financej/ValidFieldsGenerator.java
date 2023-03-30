@@ -61,7 +61,10 @@ public class ValidFieldsGenerator {
         String lastName = lastNames[random.nextInt(lastNames.length)];
         return firstName + "" + lastName;
     }
-
+    public static double getRandomDouble() {
+        Random random = new Random();
+        return random.nextDouble();
+    }
     public static Date getValidRandomDate() {
         // return random day beetwen 1 and 31
         // return random month beetwen 1 and 12
