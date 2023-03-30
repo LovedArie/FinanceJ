@@ -102,4 +102,25 @@ public class ValidFieldsGenerator {
         }
         return true;
     }
+
+    //generate random amount between MIN DOUBLE VALUE and MAX DOUBLE VALUE
+    public static double generateRandomAmount() {
+        double amount = ThreadLocalRandom.current().nextDouble(Double.MIN_VALUE, Double.MAX_VALUE);
+        return amount;
+    }
+
+    //generate random payee between 2 and 50 characters
+    public static String generateRandomPayee() {
+        String payee = "";
+        int length = ThreadLocalRandom.current().nextInt(2, 50 + 1);
+        for (int i = 0; i < length; i++) {
+            //Append random alphanumeric character to name of account
+            if (ThreadLocalRandom.current().nextBoolean()) {
+                payee += (char) ThreadLocalRandom.current().nextInt('a', 'z' + 1);
+            } else {
+                payee += (char) ThreadLocalRandom.current().nextInt('0', '9' + 1);
+            }
+        }
+        return payee;
+    }
 }
