@@ -27,6 +27,26 @@ public class ValidFieldsGenerator {
 //            System.out.println("List of valid account names---->" + names.toString());
         return names;
     }
+
+    //generate a list of 100 invalid account names (empty, less than 2 characters, more than 51 to 100 characters, or with non-alphanumeric characters)
+    // use an array of 100 strings to store the invalid account names
+    // use a random number generator to generate the length of the invalid account names (between 0 and 100)
+    // every random names must have specials characters (!@#$%^&*()_+{}|:"<>?[]\;',./) except empty one
+    public static List<String> generateInvalidAccountNames() {
+        List<String> invalidNames = new ArrayList<>();
+        Random random = new Random();
+        int length = random.nextInt(100);
+        for (int i = 0; i < length; i++) {
+            StringBuilder sb = new StringBuilder();
+            for (int j = 0; j < length; j++) {
+                //Append random specials character (!@#$%^&*()_+{}|:"<>?[]\;',./) to name of account
+                char randomChar = (char) ThreadLocalRandom.current().nextInt(33, 47 + 1); // limit to ASCII printable characters
+            }
+            invalidNames.add(sb.toString());
+        }
+        return invalidNames;
+    }
+
     //Create a list of descriptions between 1 and 250 characters with any printable characters
     public static List<String> generateValidDescriptions() {
         List<String> descriptions = new ArrayList<>();
@@ -44,6 +64,26 @@ public class ValidFieldsGenerator {
 //            System.out.println("List of valid account descriptions---->" + descriptions.toString());
         return descriptions;
     }
+
+    //generate a list of 100 invalid descriptions (empty, less than 1 characters, more than 251 to 400 characters, or with non-printable characters)
+    // use a random number generator to generate the length of the invalid descriptions (between 0 and 100)
+    // every random descriptions must have between 251 and 400 characters
+    // every random descriptions must have specials characters (!@#$%^&*()_+{}|:"<>?[]\;',./) except empty one
+    public static List<String> generateInvalidDescriptions() {
+        List<String> invalidDescriptions = new ArrayList<>();
+        Random random = new Random();
+        int length = random.nextInt(500-251) +251;
+        for (int i = 0; i < length; i++) {
+            StringBuilder sb = new StringBuilder();
+            for (int j = 0; j < length; j++) {
+                //Append random specials character (!@#$%^&*()_+{}|:"<>?[]\;',./) to description of account
+                char randomChar = (char) ThreadLocalRandom.current().nextInt(33, 47 + 1); // limit to ASCII printable characters
+            }
+            invalidDescriptions.add(sb.toString());
+        }
+        return invalidDescriptions;
+    }
+
 
     //Create a list of budget between Double.MIN_VALUE and Double.MAX_VALUE
     public static List<Double> generateValidBudgets() {
@@ -91,6 +131,35 @@ public class ValidFieldsGenerator {
         return dates;
     }
 
+    public static List<Date> getInvalidRandomDate() {
+        // return random day beetwen 1 and 31
+        // return random month beetwen 1 and 12
+        // return random year beetwen -9999 and 9999
+        int day;
+        int month;
+        int year;
+        boolean bool = true;
+        int count = 0;
+        List<Date> dates = new ArrayList<>();
+        Date date = new Date();
+        while (bool) {
+            day = ThreadLocalRandom.current().nextInt(1, 31 + 1);
+            month = ThreadLocalRandom.current().nextInt(1, 12 + 1);
+            year = ThreadLocalRandom.current().nextInt(-9999, 9999 + 1);
+            date.setDate(day);date.setMonth(month);date.setYear(year);
+            if(!checkIfDateIsValid(date)) {
+                dates.add(date);
+                if(count == 100) {
+                    bool = false;
+                }
+            }
+            count++;
+        }
+        // print date format AAAA-MM-JJ
+        //System.out.println("Date: " + year + "-" + month + "-" + day);
+        return dates;
+    }
+
     public static boolean checkIfDateIsValid(Date date) {
         //check if the Date is valid
         if (date.getYear() < -9999 || date.getYear() > 9999) {
@@ -119,29 +188,21 @@ public class ValidFieldsGenerator {
         return true;
     }
 
-    //generate random amount between MIN DOUBLE VALUE and MAX DOUBLE VALUE
-    public static double generateValidRandomAmount() {
-        double amount = ThreadLocalRandom.current().nextDouble(Double.MIN_VALUE, Double.MAX_VALUE);
-        return amount;
-    }
-
-    //generate random payee between 2 and 50 characters
-    public static String generateValidRandomPayee() {
-        String payee = "";
-        int length = ThreadLocalRandom.current().nextInt(2, 50 + 1);
-        for (int i = 0; i < length; i++) {
-            //Append random alphanumeric character to name of account
-            if (ThreadLocalRandom.current().nextBoolean()) {
-                payee += (char) ThreadLocalRandom.current().nextInt('a', 'z' + 1);
-            } else {
-                payee += (char) ThreadLocalRandom.current().nextInt('0', '9' + 1);
-            }
+    //generate random list of amount between MIN DOUBLE VALUE and MAX DOUBLE VALUE
+    public static List<Double> generateValidRandomAmount() {
+        List<Double> amounts = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            amounts.add(ThreadLocalRandom.current().nextDouble(Double.MIN_VALUE, Double.MAX_VALUE));
         }
-        return payee;
+        return amounts;
     }
 
-    // generate random boolean
-    public static boolean generateRandomRec() {
-        return ThreadLocalRandom.current().nextBoolean();
+    // generate random list of boolean
+    public static List<Boolean> generateValidRandomBoolean() {
+        List<Boolean> booleans = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            booleans.add(ThreadLocalRandom.current().nextBoolean());
+        }
+        return booleans;
     }
 }
