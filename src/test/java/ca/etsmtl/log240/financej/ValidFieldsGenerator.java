@@ -123,4 +123,9 @@ public class ValidFieldsGenerator {
         }
         return payee;
     }
+
+    // generate random boolean
+    public static boolean generateRandomRec() {
+        return ThreadLocalRandom.current().nextBoolean();
+    }
 }
