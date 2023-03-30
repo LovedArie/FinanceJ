@@ -104,13 +104,13 @@ public class ValidFieldsGenerator {
     }
 
     //generate random amount between MIN DOUBLE VALUE and MAX DOUBLE VALUE
-    public static double generateRandomAmount() {
+    public static double generateValidRandomAmount() {
         double amount = ThreadLocalRandom.current().nextDouble(Double.MIN_VALUE, Double.MAX_VALUE);
         return amount;
     }
 
     //generate random payee between 2 and 50 characters
-    public static String generateRandomPayee() {
+    public static String generateValidRandomPayee() {
         String payee = "";
         int length = ThreadLocalRandom.current().nextInt(2, 50 + 1);
         for (int i = 0; i < length; i++) {
