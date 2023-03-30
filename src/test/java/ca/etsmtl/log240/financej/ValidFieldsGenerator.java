@@ -119,29 +119,36 @@ public class ValidFieldsGenerator {
         return true;
     }
 
-    //generate random amount between MIN DOUBLE VALUE and MAX DOUBLE VALUE
-    public static double generateValidRandomAmount() {
-        double amount = ThreadLocalRandom.current().nextDouble(Double.MIN_VALUE, Double.MAX_VALUE);
-        return amount;
-    }
-
-    //generate random payee between 2 and 50 characters
-    public static String generateValidRandomPayee() {
-        String payee = "";
-        int length = ThreadLocalRandom.current().nextInt(2, 50 + 1);
-        for (int i = 0; i < length; i++) {
-            //Append random alphanumeric character to name of account
-            if (ThreadLocalRandom.current().nextBoolean()) {
-                payee += (char) ThreadLocalRandom.current().nextInt('a', 'z' + 1);
-            } else {
-                payee += (char) ThreadLocalRandom.current().nextInt('0', '9' + 1);
-            }
+    //generate random list of amount between MIN DOUBLE VALUE and MAX DOUBLE VALUE
+    public static List<Double> generateValidRandomAmount() {
+        List<Double> amounts = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            amounts.add(ThreadLocalRandom.current().nextDouble(Double.MIN_VALUE, Double.MAX_VALUE));
         }
-        return payee;
+        return amounts;
     }
 
-    // generate random boolean
-    public static boolean generateRandomRec() {
-        return ThreadLocalRandom.current().nextBoolean();
+    // generate random list of boolean
+    public static List<Boolean> generateValidRandomBoolean() {
+        List<Boolean> booleans = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            booleans.add(ThreadLocalRandom.current().nextBoolean());
+        }
+        return booleans;
+    }
+
+    // generate invalid description of account
+    public static List<String> generateInvalidDescription() {
+        List<String> descriptions = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            StringBuilder sb = new StringBuilder();
+            int length = ThreadLocalRandom.current().nextInt(1, 100 + 1);
+            for (int j = 0; j < length; j++) {
+                //Append special character (!, @, #, $, %, ^, &, *, (, ), _, +, =, {, }, [, ], |, :, ;, ', ", <, >, ?, /, \)
+                sb.append((char) ThreadLocalRandom.current().nextInt(33, 47 + 1));
+            }
+            descriptions.add(sb.toString());
+        }
+        return descriptions;
     }
 }
