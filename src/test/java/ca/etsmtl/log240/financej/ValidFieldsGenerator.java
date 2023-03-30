@@ -1,6 +1,7 @@
 package ca.etsmtl.log240.financej;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -50,5 +51,45 @@ public class ValidFieldsGenerator {
         String firstName = firstNames[random.nextInt(firstNames.length)];
         String lastName = lastNames[random.nextInt(lastNames.length)];
         return firstName + "" + lastName;
+    }
+
+    public static Date getRandomDate() {
+        // return random day beetwen 1 and 31
+        // return random month beetwen 1 and 12
+        // return random year beetwen -9999 and 9999
+        int day = ThreadLocalRandom.current().nextInt(1, 31 + 1);
+        int month = ThreadLocalRandom.current().nextInt(1, 12 + 1);
+        int year = ThreadLocalRandom.current().nextInt(-9999, 9999 + 1);
+        // print date format AAAA-MM-JJ
+        //System.out.println("Date: " + year + "-" + month + "-" + day);
+        return new Date(year, month, day);
+    }
+
+    public static boolean checkIfDateIsValid(Date date) {
+        //check if the Date is valid
+        if (date.getYear() < -9999 || date.getYear() > 9999) {
+            return false;
+        }
+        if (date.getMonth() < 1 || date.getMonth() > 12) {
+            return false;
+        }
+        if (date.getDate() < 1 || date.getDate() > 31) {
+            return false;
+        }
+        //check if the day is valid for its month (bissextil year for example)
+        if (date.getMonth() == 2) {
+            if (date.getDate() > 29) {
+                return false;
+            }
+            if (date.getDate() == 29 && date.getYear() % 4 != 0) {
+                return false;
+            }
+        }
+        if (date.getMonth() == 4 || date.getMonth() == 6 || date.getMonth() == 9 || date.getMonth() == 11) {
+            if (date.getDate() > 30) {
+                return false;
+            }
+        }
+        return true;
     }
 }
