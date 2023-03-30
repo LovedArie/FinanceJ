@@ -30,13 +30,4 @@ public class LedgersTest extends FinancejAbstractTest{
         //closing connection to database
         exitButton.click();
     }
-    private class ValidCategoriesHandler extends WindowHandler {
-        private String name, description;
-        private int budget;
-        @Override
-        public Trigger process(Window window) throws Exception {
-            return null;
-        }
-
-    }
 }
