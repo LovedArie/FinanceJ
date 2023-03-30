@@ -27,6 +27,26 @@ public class ValidFieldsGenerator {
 //            System.out.println("List of valid account names---->" + names.toString());
         return names;
     }
+
+    //generate a list of 100 invalid account names (empty, less than 2 characters, more than 51 to 100 characters, or with non-alphanumeric characters)
+    // use an array of 100 strings to store the invalid account names
+    // use a random number generator to generate the length of the invalid account names (between 0 and 100)
+    // every random names must have specials characters (!@#$%^&*()_+{}|:"<>?[]\;',./) except empty one
+    public static List<String> generateInvalidAccountNames() {
+        List<String> invalidNames = new ArrayList<>();
+        Random random = new Random();
+        int length = random.nextInt(100);
+        for (int i = 0; i < length; i++) {
+            StringBuilder sb = new StringBuilder();
+            for (int j = 0; j < length; j++) {
+                //Append random specials character (!@#$%^&*()_+{}|:"<>?[]\;',./) to name of account
+                char randomChar = (char) ThreadLocalRandom.current().nextInt(33, 47 + 1); // limit to ASCII printable characters
+            }
+            invalidNames.add(sb.toString());
+        }
+        return invalidNames;
+    }
+
     //Create a list of descriptions between 1 and 250 characters with any printable characters
     public static List<String> generateValidDescriptions() {
         List<String> descriptions = new ArrayList<>();
