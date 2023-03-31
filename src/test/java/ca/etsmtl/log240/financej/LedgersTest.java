@@ -36,6 +36,12 @@ public class LedgersTest extends FinancejAbstractTest {
         exitButton.click();
     }
 
+
+    @Test
+    public void test() throws Exception {
+        WindowInterceptor.init(ledgerButton.triggerClick()).process(new ValidLedgerHandler("2000-01-31", "$", 200, "te", "Te")).run();
+    }
+
     //T1-61
     @Test
     public void testAddAndDeleteLedgersWithValidDate() throws Exception {
@@ -106,19 +112,23 @@ public class LedgersTest extends FinancejAbstractTest {
         }
 
         public Trigger process(Window window) throws Exception {
-            TextBox dateTextBox = window.getInputTextBox("DateTextField");
-            TextBox payeeTextBox = window.getInputTextBox("PayeeTextField");
-            TextBox descriptionTextBox = window.getInputTextBox("DescriptionTextField");
-            TextBox amountTextBox = window.getInputTextBox("AmountTextField");
-            ComboBox categoryComboBox = window.getComboBox("CategoryComboBox");
+            TextBox dateTextBox = window.getInputTextBox("DATE_TEXT_FIELD");
+            TextBox payeeTextBox = window.getInputTextBox("PAYEE_TEXT_FIELD");
+            TextBox descriptionTextBox = window.getInputTextBox("DESCRIPTION_TEXT_FIELD");
+            TextBox amountTextBox = window.getInputTextBox("AMOUNT_TEXT_FIELD");
+            ComboBox categoryComboBox = window.getComboBox("CATEGORY_COMBO_BOX");
+
 
             dateTextBox.setText(date);
             payeeTextBox.setText(Payee);
             descriptionTextBox.setText(description);
             amountTextBox.setText(String.valueOf(amount));
             categoryComboBox.select(category);
+            window.getButton("Add Transaction").click();
 
-            ret = window.getButton("AddTransactionButton").triggerClick();
+            assertEquals(1,categoriesTable.getRowCount());
+
+            ret =window.getButton("Close").triggerClick();
             return ret;
         }
     }
