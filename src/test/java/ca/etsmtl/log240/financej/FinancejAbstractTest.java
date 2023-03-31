@@ -28,6 +28,7 @@ public abstract class FinancejAbstractTest extends UISpecTestCase {
         Window window = getMainWindow();
         accountsButton = window.getButton("Accounts");
         categoriesButton = window.getButton("Categories");
+        ledgerButton = window.getButton("Ledger");
         exitButton = window.getButton("Exit");
         UISpec4J.setWindowInterceptionTimeLimit(100);
     }
