@@ -427,7 +427,7 @@ class CategoryListTableModel extends AbstractTableModel {
                 throw new Throwable("Nom/Description/Budget ne correspondant pas aux critères");
         } catch (Throwable e) {
             System.out.println(" . . . exception thrown: AddCategory");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             ErrorCode = 1;
         }
 
