@@ -11,6 +11,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="financej" target="1.7" />
+      <module name="financej-team12" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

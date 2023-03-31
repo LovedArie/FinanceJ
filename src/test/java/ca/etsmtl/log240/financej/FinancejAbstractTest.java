@@ -15,6 +15,7 @@ public abstract class FinancejAbstractTest extends UISpecTestCase {
     protected Button reportsButton;
     protected Button exitButton;
     protected Table accountsTable;
+    protected Table categoriesTable;
 
 
     static {
@@ -26,9 +27,8 @@ public abstract class FinancejAbstractTest extends UISpecTestCase {
         setAdapter(new MainClassAdapter(FinanceJ.class));
         Window window = getMainWindow();
         accountsButton = window.getButton("Accounts");
+        categoriesButton = window.getButton("Categories");
         exitButton = window.getButton("Exit");
-
-
         UISpec4J.setWindowInterceptionTimeLimit(100);
     }
 
