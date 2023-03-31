@@ -65,6 +65,11 @@ public class ValidFieldsGenerator {
         Random random = new Random();
         return random.nextDouble();
     }
+
+    public static float getRandomFloat(float min, float max) {
+        Random random = new Random();
+        return min + (max - min) * random.nextFloat();
+    }
     public static Date getValidRandomDate() {
         // return random day beetwen 1 and 31
         // return random month beetwen 1 and 12
