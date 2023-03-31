@@ -131,7 +131,11 @@ public class ValidFieldsGenerator {
         return dates;
     }
 
-    public static List<Date> getInvalidRandomDate() {
+    public static float getRandomFloat(float min, float max) {
+        Random random = new Random();
+        return min + (max - min) * random.nextFloat();
+    }
+    public static Date getValidRandomDate() {
         // return random day beetwen 1 and 31
         // return random month beetwen 1 and 12
         // return random year beetwen -9999 and 9999

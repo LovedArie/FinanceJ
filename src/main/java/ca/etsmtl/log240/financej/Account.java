@@ -410,8 +410,6 @@ class AccountListTableModel extends AbstractTableModel {
     public int AddAccount(String Name, String Description) {
         int ErrorCode = 0;
         PreparedStatement psInsert;
-        System.out.println(Name.length());
-
         try {
             if(Name.length()>1 && Name.matches("[a-zA-Z0-9]+") && Name.length() <= 50 && !Description.isEmpty() && Description.length() <= 250) {
                 psInsert = conn.prepareStatement("insert into account(name, description) values(?,?)");
@@ -427,7 +425,7 @@ class AccountListTableModel extends AbstractTableModel {
             }
         } catch (Throwable e) {
             System.out.println(" . . . exception thrown: AddAccount");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             ErrorCode = 1;
         }
 

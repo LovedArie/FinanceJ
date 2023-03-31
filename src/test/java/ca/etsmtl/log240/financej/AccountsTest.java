@@ -63,45 +63,46 @@ public class AccountsTest extends FinancejAbstractTest {
     }
 
     //TO-12
-    //Teste l'ajout d'un compte et la suppression avec un nom de 1 à 50 caracteres
-    public void testAddAccount(){
+    //Teste l'ajout d'un compte et la suppression avec un nom et une description valide
+    @Test
+    public void testT0_12(){
         WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("Te", "$AAAAA")).run();
     }
 
     //T1-13
     //Teste l'ajout d'un compte avec un espace vide pour le nom
-    @Test(expected = Throwable.class)
-    public void testAddAndDeleteAccountsWithBlankNameError() throws Throwable {
-        WindowInterceptor.init(accountsButton.triggerClick()).process(new InvalidAccountsHandler("","$")).run();
+    @Test
+    public void testT1_13() {
+        WindowInterceptor.init(accountsButton.triggerClick()).process(new InvalidAccountsHandler(" ","$")).run();
     }
 
     //T1-14
     //Teste l'ajout d'un compte avec un nom invalide, car le nom est trop long (51 caracteres)
-    @Test(expected = Throwable.class)
-    public void testAddAndDeleteAccountsWithNameTooLongError() {
+    @Test
+    public void testT1_14() {
         WindowInterceptor.init(accountsButton.triggerClick()).process(new InvalidAccountsHandler("antiquisantiquitateapeirianaperiamapeririapteiaaaaa","$")).run();
     }
 
 
 
-    //T0-15 Teste l'ajout d'un compte avec un nom invalide, car il y a un caractere special
-    @Test(expected = Throwable.class)
-    public void testAddAndDeleteAccountsWithInvalidNameError() {
+    //T1-15 Teste l'ajout d'un compte avec un nom invalide, car il y a un caractere special
+    @Test
+    public void testT1_15() {
         WindowInterceptor.init(accountsButton.triggerClick()).process(new InvalidAccountsHandler("antiquisantiquitateapeirianaperiamapeririapte$","$")).run();
     }
 
 
     //T1-16
     //Teste l'ajout d'un compte et la suppression avec une description vide
-    @Test(expected = Throwable.class)
-    public void testAddAndDeleteAccountsWithEmptyDescriptionError(){
-        WindowInterceptor.init(accountsButton.triggerClick()).process(new InvalidAccountsHandler("An", "a")).run();
+    @Test
+    public void testT1_16(){
+        WindowInterceptor.init(accountsButton.triggerClick()).process(new InvalidAccountsHandler("An", "")).run();
     }
 
     //T1-17
     //Teste l'ajout d'un compte avec une description trop longue (251 caracteres)
-    @Test(expected = Throwable.class)
-    public void testAddAndDeleteAccountsWithDescriptionTooLongError(){
+    @Test
+    public void testT1_17(){
         String descTooLong = "bonis bono bonorum bonum brevi brevis breviter brute " +
                 "brutus cadere caecilii caeco caelo calere campum canes captet capti " +
                 "captiosa careat carere careret caret caritatem carum causa causae causam " +
@@ -109,96 +110,14 @@ public class AccountsTest extends FinancejAbstractTest {
         WindowInterceptor.init(accountsButton.triggerClick()).process(new InvalidAccountsHandler("An", descTooLong)).run();
     }
 
-//
-//    //T1-13 Teste l'ajout d'un compte avec un espace vide pour le nom
-//    @Test
-//    public void testAddAndDeleteAccountsWithBlankNameError() {
-//        try {
-//            WindowInterceptor.init(accountsButton.triggerClick()).process(new InvalidAccountsHandler("", "$")).run();
-//        } catch (Throwable e) {
-//            final String msg = "name is less than 2 characters , contains illegal characters or is too long";
-//            assertEquals(msg, e.getMessage());
-//        }
-//    }
-//
-//    //T1-14 Teste l'ajout d'un compte avec un nom invalide, car le nom est trop long (51 caracteres)
-//    @Test
-//    public void testAddAndDeleteAccountsWithNameTooLongError() {
-//        try {
-//            String nameTooLong = "antiquisantiquitateapeirianaperiamapeririapteiaaaaa";
-//            WindowInterceptor.init(accountsButton.triggerClick()).process(new InvalidAccountsHandler(nameTooLong, "$")).run();
-//        } catch (Throwable e) {
-//            final String msg = "name is less than 2 characters , contains illegal characters or is too long";
-//            assertEquals(msg, e.getMessage());
-//        }
-//    }
-//
-//    //T0-15 Teste l'ajout d'un compte avec un nom invalide, car il y a des caracteres speciaux
-//
-//    @Test
-//    public void testAddAndDeleteAccountsWithInvalidNameError() {
-//        try {
-//            WindowInterceptor.init(accountsButton.triggerClick()).process(new InvalidAccountsHandler("antiquisantiquitateapeirianaperiamapeririapte$", "$")).run();
-//        } catch (Throwable e) {
-//            final String msg = "name is less than 2 characters , contains illegal characters or is too long";
-//            assertEquals(msg, e.getMessage());
-//        }
-//    }
-//
-//    //T1-16 Teste l'ajout d'un compte et la suppression avec une description vide
-//    @Test
-//    public void testAddAndDeleteAccountsWithEmptyDescriptionError() {
-//        try {
-//            WindowInterceptor.init(accountsButton.triggerClick()).process(new InvalidAccountsHandler("An", "")).run();
-//        } catch (Throwable e) {
-//            final String msg = "description is empty or too long";
-//            assertEquals(msg, e.getMessage());
-//        }
-//    }
-//
-//
-//    //T1-17 Teste l'ajout d'un compte avec une description trop longue (251 caracteres)
-//    @Test
-//    public void testAddAndDeleteAccountsWithDescriptionTooLongError() {
-//        try {
-//            String descTooLong = "bonis bono bonorum bonum brevi brevis breviter brute " +
-//                    "brutus cadere caecilii caeco caelo calere campum canes captet capti " +
-//                    "captiosa careat carere careret caret caritatem carum causa causae causam " +
-//                    "causas cedentem celeritas censes censet centurionum certa";
-//            WindowInterceptor.init(accountsButton.triggerClick()).process(new InvalidAccountsHandler("An", descTooLong)).run();
-//        } catch (Throwable e) {
-//            final String msg = "description is empty or too long";
-//            assertEquals(msg, e.getMessage());
-//        }
-//    }
-//
-//
-//
-//    //TO-18
-//    @Test
-//    public void testAddAccountWithMaxLength() {
-//        String name = "antiquisantiquitateapeirianaperiamapeririapteaaaaa";
-//        String desc ="bonis bono bonorum bonum brevi brevis breviter brute " +
-//                "brutus cadere caecilii caeco caelo calere campum canes captet " +
-//                "capti captiosa careat carere careret caret caritatem carum " +
-//                "causa causae causam causas cedentem celeritas censes censet " +
-//                "centurionum cer$";
-//        WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler(name, desc)).run();
-//    }
-//
-//
-//    //Teste l'ajout d'un compte et la suppression avec un nom de 1 caractere
-//    @Test
-//    public void testAddAndDeleteAccountsWithNameTooShortError() {
-//        try {
-//            WindowInterceptor.init(accountsButton.triggerClick()).process(new InvalidAccountsHandler("a!!!!", "$")).run();
-////            fail();
-//        } catch (Throwable e) {
-//            String msg = "name is less than 2 charactdadaddaers3 , contains illegal characters or is too long";
-//            assertEquals(msg, e.getMessage());
-//            assertNotNull(e);
-//        }
-//    }
+
+    //T0-18 Teste l'ajout d'un compte avec une description de taille maximale et un nom de taille maximale
+    @Test
+    public void testT0_18(){
+        String desc = "bonis bono bonorum bonum brevi brevis breviter brute brutus cadere caecilii caeco caelo calere campum canes " +
+                "captet capti captiosa careat carere careret caret caritatem carum causa causae causam causas cedentem celeritas censes censet centurionum cer$";
+        WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("antiquisantiquitateapeirianaperiamapeririapteaaaaa", desc)).run();
+    }
 
     private class ValidAccountsHandler extends WindowHandler {
         private String name;
@@ -264,7 +183,9 @@ public class AccountsTest extends FinancejAbstractTest {
         }
     }
 
+    //handler pour les comptes invalides
     private class InvalidAccountsHandler extends WindowHandler {
+
         private String name;
         private String description;
 
@@ -272,20 +193,15 @@ public class AccountsTest extends FinancejAbstractTest {
             this.name = name;
             this.description = description;
         }
+        //Teste l'ajout d'un compte invalide
         public Trigger process(Window window){
-            try {
-                testError(window, name, description);
-            } catch (Throwable e) {
-                assertEquals("expected:<0> but was:<1>", e.getMessage());
-                e.printStackTrace();
-            }
-//            testError(window, name, description);
+            //appeler la methode qui teste l'ajout d'un compte invalide
+            testError(window, name, description);
+            // fermer la fenetre
             ret = window.getButton("Close").triggerClick();
             return ret;
         }
-        private void testError(Window window, String name, String description) throws Throwable{
-
-
+        private void testError(Window window, String name, String description){
             accountsTable = window.getTable();
             int rowCount = accountsTable.getRowCount();
 
@@ -301,13 +217,13 @@ public class AccountsTest extends FinancejAbstractTest {
 
             if (accountsTable.getRowCount() == 0) {
                 System.out.println("Account table before adding the account---->" + accountsTable.toString());
-                // ajouter un compte
+                // essayer d'ajouter un compte invalide
                 window.getTextBox("NAME_TEXT_FIELD").setText(name);
                 window.getTextBox("DESCRIPTION_TEXT_FIELD").setText(description);
 
                 window.getButton("Add Account").click();
                 System.out.println("Account table after adding the account---->" + accountsTable.toString());
-                //On ne devrait rien avoir dans la table
+                //On ne devrait rien avoir dans la table, car on ne peut pas ajouter un compte invalide
                 assertEquals(0,accountsTable.getRowCount());
 
 
