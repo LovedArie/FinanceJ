@@ -9,7 +9,9 @@ import org.uispec4j.interception.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 public class CategoriesTest extends FinancejAbstractTest {
     private Table categoriesTable;
@@ -44,7 +46,7 @@ public class CategoriesTest extends FinancejAbstractTest {
     }
     @Test
     public void testAddAndDeleteCategoriesWithEmptyName() throws Exception {
-
+        assertThrow();
     }
     @Test
     public void testAddAndDeleteCategoriesWithEmptyDescription() throws Exception {
