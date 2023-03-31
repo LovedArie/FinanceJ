@@ -410,17 +410,21 @@ class AccountListTableModel extends AbstractTableModel {
     public int AddAccount(String Name, String Description) {
         int ErrorCode = 0;
         PreparedStatement psInsert;
+        System.out.println(Name.length());
 
         try {
-            if(Name.isEmpty()==false && Name.matches("[a-zA-Z0-9]+")){
+            if(Name.length()>1 && Name.matches("[a-zA-Z0-9]+") && Name.length() <= 50 && !Description.isEmpty() && Description.length() <= 250) {
                 psInsert = conn.prepareStatement("insert into account(name, description) values(?,?)");
                 psInsert.setString(1, Name);
                 psInsert.setString(2, Description);
 
                 psInsert.executeUpdate();
                 fireTableRowsInserted(getRowCount() + 1, getRowCount() + 1);
-            } else
-                throw new Throwable();
+            } if (Name.length()<2 || !Name.matches("[a-zA-Z0-9]+") || Name.length() > 50) {
+                throw new Throwable("name is less than 2 characters , contains illegal characters or is too long");
+            } if (Description.isEmpty() || Description.length() > 250) {
+                throw new Throwable("description is empty or too long");
+            }
         } catch (Throwable e) {
             System.out.println(" . . . exception thrown: AddAccount");
             e.printStackTrace();
