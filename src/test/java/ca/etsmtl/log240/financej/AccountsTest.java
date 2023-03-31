@@ -114,7 +114,8 @@ public class AccountsTest extends FinancejAbstractTest {
     //T0-18 Teste l'ajout d'un compte avec une description de taille maximale et un nom de taille maximale
     @Test
     public void testT0_18(){
-        String desc = "bonis bono bonorum bonum brevi brevis breviter brute brutus cadere caecilii caeco caelo calere campum canes captet capti captiosa careat carere careret caret caritatem carum causa causae causam causas cedentem celeritas censes censet centurionum cer$";
+        String desc = "bonis bono bonorum bonum brevi brevis breviter brute brutus cadere caecilii caeco caelo calere campum canes " +
+                "captet capti captiosa careat carere careret caret caritatem carum causa causae causam causas cedentem celeritas censes censet centurionum cer$";
         WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("antiquisantiquitateapeirianaperiamapeririapteaaaaa", desc)).run();
     }
 
@@ -182,7 +183,9 @@ public class AccountsTest extends FinancejAbstractTest {
         }
     }
 
+    //handler pour les comptes invalides
     private class InvalidAccountsHandler extends WindowHandler {
+
         private String name;
         private String description;
 
@@ -190,8 +193,11 @@ public class AccountsTest extends FinancejAbstractTest {
             this.name = name;
             this.description = description;
         }
+        //Teste l'ajout d'un compte invalide
         public Trigger process(Window window){
+            //appeler la methode qui teste l'ajout d'un compte invalide
             testError(window, name, description);
+            // fermer la fenetre
             ret = window.getButton("Close").triggerClick();
             return ret;
         }
@@ -211,13 +217,13 @@ public class AccountsTest extends FinancejAbstractTest {
 
             if (accountsTable.getRowCount() == 0) {
                 System.out.println("Account table before adding the account---->" + accountsTable.toString());
-                // ajouter un compte
+                // essayer d'ajouter un compte invalide
                 window.getTextBox("NAME_TEXT_FIELD").setText(name);
                 window.getTextBox("DESCRIPTION_TEXT_FIELD").setText(description);
 
                 window.getButton("Add Account").click();
                 System.out.println("Account table after adding the account---->" + accountsTable.toString());
-                //On ne devrait rien avoir dans la table, car on a pas ajouter le compte
+                //On ne devrait rien avoir dans la table, car on ne peut pas ajouter un compte invalide
                 assertEquals(0,accountsTable.getRowCount());
 
 
