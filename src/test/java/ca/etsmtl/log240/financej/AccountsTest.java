@@ -63,31 +63,31 @@ public class AccountsTest extends FinancejAbstractTest {
     }
 
     //TO-12
-    //Teste l'ajout d'un compte et la suppression avec un nom de 1 à 50 caracteres
+    //Teste l'ajout d'un compte et la suppression avec un nom et une description valide
     @Test
-    public void testAddAccount(){
+    public void testT0_12(){
         WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("Te", "$AAAAA")).run();
     }
 
     //T1-13
     //Teste l'ajout d'un compte avec un espace vide pour le nom
     @Test
-    public void testAddAndDeleteAccountsWithBlankNameError() {
+    public void testT1_13() {
         WindowInterceptor.init(accountsButton.triggerClick()).process(new InvalidAccountsHandler(" ","$")).run();
     }
 
     //T1-14
     //Teste l'ajout d'un compte avec un nom invalide, car le nom est trop long (51 caracteres)
     @Test
-    public void testAddAndDeleteAccountsWithNameTooLongError() {
+    public void testT1_14() {
         WindowInterceptor.init(accountsButton.triggerClick()).process(new InvalidAccountsHandler("antiquisantiquitateapeirianaperiamapeririapteiaaaaa","$")).run();
     }
 
 
 
-    //T0-15 Teste l'ajout d'un compte avec un nom invalide, car il y a un caractere special
+    //T1-15 Teste l'ajout d'un compte avec un nom invalide, car il y a un caractere special
     @Test
-    public void testAddAndDeleteAccountsWithInvalidNameError() {
+    public void testT1_15() {
         WindowInterceptor.init(accountsButton.triggerClick()).process(new InvalidAccountsHandler("antiquisantiquitateapeirianaperiamapeririapte$","$")).run();
     }
 
@@ -95,19 +95,27 @@ public class AccountsTest extends FinancejAbstractTest {
     //T1-16
     //Teste l'ajout d'un compte et la suppression avec une description vide
     @Test
-    public void testAddAndDeleteAccountsWithEmptyDescriptionError(){
+    public void testT1_16(){
         WindowInterceptor.init(accountsButton.triggerClick()).process(new InvalidAccountsHandler("An", "")).run();
     }
 
     //T1-17
     //Teste l'ajout d'un compte avec une description trop longue (251 caracteres)
     @Test
-    public void testAddAndDeleteAccountsWithDescriptionTooLongError(){
+    public void testT1_17(){
         String descTooLong = "bonis bono bonorum bonum brevi brevis breviter brute " +
                 "brutus cadere caecilii caeco caelo calere campum canes captet capti " +
                 "captiosa careat carere careret caret caritatem carum causa causae causam " +
                 "causas cedentem celeritas censes censet centurionum certa";
         WindowInterceptor.init(accountsButton.triggerClick()).process(new InvalidAccountsHandler("An", descTooLong)).run();
+    }
+
+
+    //T0-18 Teste l'ajout d'un compte avec une description de taille maximale et un nom de taille maximale
+    @Test
+    public void testT0_18(){
+        String desc = "bonis bono bonorum bonum brevi brevis breviter brute brutus cadere caecilii caeco caelo calere campum canes captet capti captiosa careat carere careret caret caritatem carum causa causae causam causas cedentem celeritas censes censet centurionum cer$";
+        WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("antiquisantiquitateapeirianaperiamapeririapteaaaaa", desc)).run();
     }
 
     private class ValidAccountsHandler extends WindowHandler {
@@ -184,7 +192,6 @@ public class AccountsTest extends FinancejAbstractTest {
         }
         public Trigger process(Window window){
             testError(window, name, description);
-//            testError(window, name, description);
             ret = window.getButton("Close").triggerClick();
             return ret;
         }
@@ -210,7 +217,7 @@ public class AccountsTest extends FinancejAbstractTest {
 
                 window.getButton("Add Account").click();
                 System.out.println("Account table after adding the account---->" + accountsTable.toString());
-                //On ne devrait rien avoir dans la table
+                //On ne devrait rien avoir dans la table, car on a pas ajouter le compte
                 assertEquals(0,accountsTable.getRowCount());
 
 
