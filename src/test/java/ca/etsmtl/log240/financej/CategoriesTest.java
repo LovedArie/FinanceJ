@@ -43,6 +43,10 @@ public class CategoriesTest extends FinancejAbstractTest {
         }
     }
     @Test
+    public void testAddAndDeleteCategoriesWithEmptyName() throws Exception {
+
+    }
+    @Test
     public void testAddAndDeleteCategoriesWithEmptyDescription() throws Exception {
         Random random = new Random();
         WindowInterceptor.init(categoriesButton.triggerClick()).process(new ValidCategoriesHandler(categoriesNomsAlphaNum.get(random.nextInt(49)), "Savings", ValidFieldsGenerator.getRandomDouble())).run();
@@ -56,9 +60,15 @@ public class CategoriesTest extends FinancejAbstractTest {
     }
     @Test
     public void testAddCategory() throws Exception {
-        WindowInterceptor.init(categoriesButton.triggerClick()).process(new ValidCategoriesHandler("Te","$AAAAA", 500d)).run();
+        WindowInterceptor.init(categoriesButton.triggerClick()).process(new ValidCategoriesHandler("Te","$AAAAA", -1000000000d)).run();
     }
-
+    /*@Test
+    public void testAddCategoryNameInvalid() {
+        assertThrows(Throwable.class,
+        ()->{
+            WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("","$")).run();
+        });
+    }*/
     private class ValidCategoriesHandler extends WindowHandler {
         private String name;
         private String description;
