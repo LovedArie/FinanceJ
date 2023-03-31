@@ -135,34 +135,7 @@ public class ValidFieldsGenerator {
         Random random = new Random();
         return min + (max - min) * random.nextFloat();
     }
-    public static Date getValidRandomDate() {
-        // return random day beetwen 1 and 31
-        // return random month beetwen 1 and 12
-        // return random year beetwen -9999 and 9999
-        int day;
-        int month;
-        int year;
-        boolean bool = true;
-        int count = 0;
-        List<Date> dates = new ArrayList<>();
-        Date date = new Date();
-        while (bool) {
-            day = ThreadLocalRandom.current().nextInt(1, 31 + 1);
-            month = ThreadLocalRandom.current().nextInt(1, 12 + 1);
-            year = ThreadLocalRandom.current().nextInt(-9999, 9999 + 1);
-            date.setDate(day);date.setMonth(month);date.setYear(year);
-            if(!checkIfDateIsValid(date)) {
-                dates.add(date);
-                if(count == 100) {
-                    bool = false;
-                }
-            }
-            count++;
-        }
-        // print date format AAAA-MM-JJ
-        //System.out.println("Date: " + year + "-" + month + "-" + day);
-        return dates;
-    }
+
 
     public static boolean checkIfDateIsValid(Date date) {
         //check if the Date is valid
