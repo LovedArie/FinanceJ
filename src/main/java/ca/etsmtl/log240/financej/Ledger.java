@@ -127,6 +127,27 @@ public class Ledger extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         TotalLabel = new javax.swing.JLabel();
 
+        DateTextField.setText("DATE_TEXT_FIELD");
+
+        AmountTextField.setText("AMOUNT_TEXT_FIELD");
+
+        PayeeTextField.setText("PAYEE_TEXT_FIELD");
+
+        DescriptionTextField.setText("DESCRIPTION_TEXT_FIELD");
+
+        RecCheckBox.setText("REC_CHECK_BOX");
+
+        CategoryComboBox.setName("CATEGORY_COMBO_BOX");
+
+        AccountsComboBox.setName("ACCOUNTS_COMBO_BOX");
+
+        jLabel1.setText("Ledger");
+
+
+
+
+
+
         setTitle("Ledger");
         setMinimumSize(new java.awt.Dimension(785, 465));
 
