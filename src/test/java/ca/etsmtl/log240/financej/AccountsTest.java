@@ -6,12 +6,9 @@ import org.uispec4j.Trigger;
 import org.uispec4j.Window;
 import org.uispec4j.interception.WindowHandler;
 import org.uispec4j.interception.WindowInterceptor;
-
-import javax.swing.*;
 import java.util.List;
 import java.util.Random;
 
-import static org.junit.Assert.assertThrows;
 
 public class AccountsTest extends FinancejAbstractTest {
     private Table accountsTable;
@@ -75,7 +72,7 @@ public class AccountsTest extends FinancejAbstractTest {
     //Teste l'ajout d'un compte avec un espace vide pour le nom
     @Test(expected = Throwable.class)
     public void testAddAndDeleteAccountsWithBlankNameError() throws Throwable {
-        WindowInterceptor.init(accountsButton.triggerClick()).process(new InvalidAccountsHandler("aaa","$")).run();
+        WindowInterceptor.init(accountsButton.triggerClick()).process(new InvalidAccountsHandler("","$")).run();
     }
 
     //T1-14
@@ -202,9 +199,6 @@ public class AccountsTest extends FinancejAbstractTest {
 //            assertNotNull(e);
 //        }
 //    }
-
-
-
 
     private class ValidAccountsHandler extends WindowHandler {
         private String name;
