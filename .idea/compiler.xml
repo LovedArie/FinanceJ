@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="financej-team12" />
+        <module name="financej-team11" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
