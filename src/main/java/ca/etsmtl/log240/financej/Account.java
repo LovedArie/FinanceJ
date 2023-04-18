@@ -5,10 +5,13 @@ package ca.etsmtl.log240.financej;
  * Created on March 5, 2008, 11:08 PM
  */
 
-import java.awt.*;
-import java.sql.*;
-import javax.swing.table.*;
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import java.awt.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 
 public class Account extends javax.swing.JDialog {
@@ -201,7 +204,6 @@ public class Account extends javax.swing.JDialog {
 
     private void AddAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddAccountButtonActionPerformed
         int ReturnCode;
-
         ReturnCode = dataModel.AddAccount(NameTextField.getText(), DescriptionTextField.getText());
         if (ReturnCode == 0) {
             NameTextField.setText("");
