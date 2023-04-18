@@ -39,28 +39,28 @@ public class AccountsTest extends FinancejAbstractTest {
     //CE24
     //Test pour ajouter un compte avec un nom valide
 //    @Test
-//    public void testAddAndDeleteAccountsWithRandomName() throws Exception {
-//        WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler(ValidFieldsGenerator.getRandomName(), "Savings")).run();
-//    }
+    public void testAddAndDeleteAccountsWithRandomName() throws Exception {
+        WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler(ValidFieldsGenerator.getRandomName(), "Savings", 0)).run();
+    }
 
     //CE24
     //Teste l'ajout d'un compte et la suppression de ce compte avec un nom ayant des caracteres alphanumériques aléatoires pour les noms de 2 à 50 caracteres CE24
     @Test
-/*    public void testAddAndDeleteAccountsWithValidNames() {
+    public void testAddAndDeleteAccountsWithValidNames() {
         for (String account : accountsNomsAlphaNum) {
-            WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler(account, "Savings")).run();
+            WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler(account, "Savings", 2)).run();
         }
-    }*/
+    }
 
 
     public void testT0_12() {
-            WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("Te", "$")).run();
+            WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("Te", "$", 1)).run();
     }
 
     public void testT1_13() {
             //WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("", "$")).run();
 
-        WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("", "$"))
+        WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("", "$", 1))
                 .process(new WindowHandler("Error Dialog") {
                     public Trigger process(Window window) {
                         System.out.println("I got here first");
@@ -74,51 +74,49 @@ public class AccountsTest extends FinancejAbstractTest {
                     }
                 })
                 .run();
-
-
-
     }
 
     public void testT1_14() {
-
-            WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("antiquisantiquitateapeirianaperiamapeririapteiaaaaa", "$")).run();
+            WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("antiquisantiquitateapeirianaperiamapeririapteiaaaaa", "$", 1)).run();
     }
 
     public void testT1_15() {
-            WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("antiquisantiquitateapeirianaperiamapeririapte$", "$")).run();
+            WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("antiquisantiquitateapeirianaperiamapeririapte$", "$", 1)).run();
     }
 
     public void testT1_16() {
-            WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("an", "")).run();
+            WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("an", "", 1)).run();
     }
 
     public void testT1_17() {
-            WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("an", "bonis bono bonorum bonum brevi brevis breviter brute brutus cadere caecilii caeco caelo calere campum canes captet capti captiosa careat carere careret caret caritatem carum causa causae causam causas cedentem celeritas censes censet centurionum certa")).run();
+            WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("an", "bonis bono bonorum bonum brevi brevis breviter brute brutus cadere caecilii caeco caelo calere campum canes captet capti captiosa careat carere careret caret caritatem carum causa causae causam causas cedentem celeritas censes censet centurionum certa", 1)).run();
     }
 
     public void testT1_18() {
-            WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("antiquisantiquitateapeirianaperiamapeririapteaaaaa", "bonis bono bonorum bonum brevi brevis breviter brute brutus cadere caecilii caeco caelo calere campum canes captet capti captiosa careat carere careret caret caritatem carum causa causae causam causas cedentem celeritas censes censet centurionum cer$")).run();
+            WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("antiquisantiquitateapeirianaperiamapeririapteaaaaa", "bonis bono bonorum bonum brevi brevis breviter brute brutus cadere caecilii caeco caelo calere campum canes captet capti captiosa careat carere careret caret caritatem carum causa causae causam causas cedentem celeritas censes censet centurionum cer$", 1)).run();
     }
 
     private class ValidAccountsHandler extends WindowHandler {
         private String name;
         private String description;
 
+        private int actionCode;
 
         private boolean eCRequirement = true;
 
-        public ValidAccountsHandler(String name, String description) {
+        public ValidAccountsHandler(String name, String description, int _actionCode) {
             this.name = name;
             this.description = description;
+            this.actionCode = _actionCode;
         }
 
         public Trigger process(Window window){
-            checkECRequirements(window, name, description);
-            return testAccount(window, name, description);
+            //checkECRequirements(window, name, description);
+            return testAccount(window, name, description, actionCode);
         }
 
 
-        private void checkECRequirements(Window window, String name, String description){
+        /*private void checkECRequirements(Window window, String name, String description){
 
             if(name.length() < 2 || name.length() > 50 || !name.matches("[a-zA-Z0-9]+")){
                 eCRequirement = false;
@@ -128,36 +126,46 @@ public class AccountsTest extends FinancejAbstractTest {
                 eCRequirement = false;
             }
 
-        }
+        }*/
 
         //Vérifie si le compte est bien ajouté et s'il est bien supprimé
-        private Trigger testAccount(Window window, String name, String description){
+        private Trigger testAccount(Window window, String name, String description, int actionCode){
             accountsTable = window.getTable();
             int rowCount = accountsTable.getRowCount();
 
-/*            System.out.println("Initial Table Count : " + rowCount);
-             //delete all rows if they exist
-            if (rowCount > 0) {
-                for (int i = 0; i < rowCount - 1 ; i++) {
-                    // select the first row with the specified name and delete it
-                    accountsTable.selectRow(1);
-                    window.getButton("Delete Account").click();
-                }
-                rowCount = accountsTable.getRowCount();
-
-
-            }*/
-            if (rowCount > 0) {
-                for(int row = 0; row < accountsTable.getRowCount(); row++){
-                    Object cellValue = accountsTable.getContentAt(row, 0);
-                    if(cellValue.equals(name)){
-                        accountsTable.selectRow(row);
-                        window.getButton("Delete Account").click();
-                        System.out.println("Account '" + name + "' was Deleted");
-                        break;
+            switch (actionCode){
+                case 0:
+                    //Delete matching name to avoid duplicated
+                    if (rowCount > 0) {
+                        for(int row = 0; row < accountsTable.getRowCount(); row++){
+                            Object cellValue = accountsTable.getContentAt(row, 0);
+                            if(cellValue.equals(name)){
+                                accountsTable.selectRow(row);
+                                window.getButton("Delete Account").click();
+                                System.out.println("Account '" + name + "' was Deleted");
+                                break;
+                            }
+                        }
                     }
-                }
+                    break;
+                case 1:
+                    //delete all rows if they exist
+                    if (rowCount > 0) {
+                        for (int i = 0; i < rowCount - 1 ; i++) {
+                            // select the first row with the specified name and delete it
+                            accountsTable.selectRow(1);
+                            window.getButton("Delete Account").click();
+                        }}
+                    break;
+
+                default:
+                    //Do nothing
+                    break;
+
             }
+
+
+
             System.out.println("New Name : " + name);
             System.out.println("New Description : " + description);
             // ajouter un compte
@@ -168,7 +176,7 @@ public class AccountsTest extends FinancejAbstractTest {
 
             System.out.println("Table Count : " + rowCount);
 
-
+            //Check if Account added was successful
             if (rowCount > 0) {
                 for(int row = 0; row < accountsTable.getRowCount(); row++){
                     Object cellValue = accountsTable.getContentAt(row, 0);
@@ -181,7 +189,9 @@ public class AccountsTest extends FinancejAbstractTest {
             }else{
                 assertFalse(false);
             }
+
             return window.getButton("Close").triggerClick();
+
 
             /*if(eCRequirement == true){
                 // vérifier que le compte a été ajouté
@@ -232,6 +242,12 @@ public class AccountsTest extends FinancejAbstractTest {
                 // vérifier que le compte a été supprimé
                 //assertEquals(accountsTable.getRowCount(), rowCount);
            // }*/
+
+            /*            System.out.println("Initial Table Count : " + rowCount);
+
+
+
+            }*/
 
 
         }
