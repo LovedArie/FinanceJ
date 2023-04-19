@@ -40,7 +40,7 @@ public class AccountsTest extends FinancejAbstractTest {
     //Test pour ajouter un compte avec un nom valide
 //    @Test
     public void testAddAndDeleteAccountsWithRandomName() throws Exception {
-        WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler(ValidFieldsGenerator.getRandomName(), "Savings", 0)).run();
+        WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler(ValidFieldsGenerator.getRandomName(), "Savings", 1)).run();
     }
 
     //CE24
@@ -48,13 +48,17 @@ public class AccountsTest extends FinancejAbstractTest {
     @Test
     public void testAddAndDeleteAccountsWithValidNames() {
         for (String account : accountsNomsAlphaNum) {
-            WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler(account, "Savings", 2)).run();
+            WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler(account, "Savings", 1)).run();
         }
+    }
+
+    public void testAddControlAccount(){
+        WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("Te", "Savings", 2)).run();
     }
 
 
     public void testT0_12() {
-            WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("Te", "$", 1)).run();
+            WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("Te", "$", 0)).run();
     }
 
     public void testT1_13() {

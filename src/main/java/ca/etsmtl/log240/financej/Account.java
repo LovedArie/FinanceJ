@@ -419,6 +419,7 @@ class AccountListTableModel extends AbstractTableModel {
                 psInsert.setString(2, Description);
 
                 psInsert.executeUpdate();
+                System.out.println("New account object was added: " + Name);
                 fireTableRowsInserted(getRowCount() + 1, getRowCount() + 1);
             } if (Name.length()<2 || !Name.matches("[a-zA-Z0-9]+") || Name.length() > 50) {
                 throw new Throwable("name is less than 2 characters , contains illegal characters or is too long");
