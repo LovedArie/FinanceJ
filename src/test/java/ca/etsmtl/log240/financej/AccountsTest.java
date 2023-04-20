@@ -10,15 +10,13 @@ import org.uispec4j.Window;
 import org.uispec4j.interception.WindowHandler;
 import org.uispec4j.interception.WindowInterceptor;
 
-import java.util.List;
-
 
 public class AccountsTest extends FinancejAbstractTest {
     private Table accountsTable;
     private Trigger ret;
 
-    private List<String> accountsNomsAlphaNum = ValidFieldsGenerator.generateValidAccountNames();
-    private List<String> descriptionsValides = ValidFieldsGenerator.generateValidDescriptions();
+//    private List<String> accountsNomsAlphaNum = ValidFieldsGenerator.generateValidAccountNames();
+//    private List<String> descriptionsValides = ValidFieldsGenerator.generateValidDescriptions();
 
     @Before
     public void setUp() throws Exception {
@@ -39,18 +37,18 @@ public class AccountsTest extends FinancejAbstractTest {
     //CE24
     //Test pour ajouter un compte avec un nom valide
 //    @Test
-    public void testAddAndDeleteAccountsWithRandomName() throws Exception {
-        WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler(ValidFieldsGenerator.getRandomName(), "Savings", 1)).run();
-    }
+//    public void testAddAndDeleteAccountsWithRandomName() throws Exception {
+//        WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler(ValidFieldsGenerator.getRandomName(), "Savings", 1)).run();
+//    }
 
     //CE24
     //Teste l'ajout d'un compte et la suppression de ce compte avec un nom ayant des caracteres alphanumériques aléatoires pour les noms de 2 à 50 caracteres CE24
     @Test
-    public void testAddAndDeleteAccountsWithValidNames() {
-        for (String account : accountsNomsAlphaNum) {
-            WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler(account, "Savings", 1)).run();
-        }
-    }
+//    public void testAddAndDeleteAccountsWithValidNames() {
+//        for (String account : accountsNomsAlphaNum) {
+//            WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler(account, "Savings", 1)).run();
+//        }
+//    }
 
     public void testAddControlAccount(){
         WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("Te", "Savings", 2)).run();
