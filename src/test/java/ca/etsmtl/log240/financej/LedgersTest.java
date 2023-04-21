@@ -323,63 +323,66 @@ public class LedgersTest extends FinancejAbstractTest {
         creatingDummyObjectforOtherModule("Te");
         WindowInterceptor.init(ledgerButton.triggerClick()).process(new ValidLedgerHandler("2000/01/31", "Te", false, "A", "Te", 1, "Te")).run();
     }
-    //T1-61
-//    @Test
-//    public void testAddAndDeleteLedgersWithValidDate() throws Exception {
-//        WindowInterceptor.init(ledgerButton.triggerClick()).process(new ValidLedgerHandler("2000/01/31", "$", 1, "te", "Te")).run();
-//    }
 
     //T1-62 //TODO : Fix this test with amount
 //    @Test
-//    public void testAddAndDeleteLedgersWithInvalidAmount() throws Exception {
-//        WindowInterceptor.init(ledgerButton.triggerClick()).process(new ValidLedgerHandler("2000-01-31", "$", -10000000000000d, "te", "Te")).run();
-//    }
+    public void testT1_62() throws Exception {
+        creatingDummyObjectforOtherModule("Te");
+        WindowInterceptor.init(ledgerButton.triggerClick()).process(new ValidLedgerHandler("2000-01-31", "", false, "$", "te", -100000000000.00, "te")).run();
+    }
 
     //T1-63
 //    @Test
-//    public void testAddAndDeleteLedgersWithValidAmount() throws Exception {
-//        WindowInterceptor.init(ledgerButton.triggerClick()).process(new ValidLedgerHandler("2000-01-31", "$", -10000000000000d, "careret caret caritatem carum causa causae causam i", "Te")).run();
-//    }
+    public void testT1_63() throws Exception {
+        creatingDummyObjectforOtherModule("Te");
+        WindowInterceptor.init(ledgerButton.triggerClick()).process(new ValidLedgerHandler("2000-01-31", "careret caret caritatem carum causa causae causam i", false,  "$", "Te",-100000000000.00, "Te")).run();
+    }
 
     //T1-64
 //    @Test
-//    public void testAddAndDeleteLedgersWithInvalidPayee() throws Exception {
-//        WindowInterceptor.init(ledgerButton.triggerClick()).process(new ValidLedgerHandler("2000-01-31", "$", -10000000000000d, "careret caret caritatem carum causa causae causam i%", "Te")).run();
-//    }
+    public void testT1_64() throws Exception {
+        creatingDummyObjectforOtherModule("Te");
+        WindowInterceptor.init(ledgerButton.triggerClick()).process(new ValidLedgerHandler("2000-01-31", "careret caret caritatem carum causa causae causam%", false, "$", "Te", -100000000000.00, "Te")).run();
+    }
 
     //T1-65
 //    @Test
-//    public void testAddAndDeleteLedgersWithInvalidDescription() throws Exception {
-//        WindowInterceptor.init(ledgerButton.triggerClick()).process(new ValidLedgerHandler("2000-01-31", "$ confirmatur confirmavit conflixisse conformavit congressus congue coniuncta coniunctione conquirendae conquisitis conscientia conscientiam consectetuer consectetur consecutionem consecutus consedit consentaneum consentientis consentinis consequamur c$", -10000000000000d, "careret caret caritatem carum causa causae causam i", "Te")).run();
-//    }
+    public void testT1_65() throws Exception {
+        creatingDummyObjectforOtherModule("Te");
+        WindowInterceptor.init(ledgerButton.triggerClick()).process(new ValidLedgerHandler("2000-01-31", "Te", false, "copiosae copulatas copulationes copulationesque corpora corpore corporis corporisque corporum corpus correcta corrigere corrumpit corrupisti corrupte corrupti cotidie cotidieque cras credere credo cruciantur crudeli crudelis cu cubilia cui cuiquam cur", "Te", 100000000000.00, "Te")).run();
+    }
 
     //T1-66
  //   @Test
-//    public void testAddAndDeleteLedgersWithValidDescription() throws Exception {
-//        WindowInterceptor.init(ledgerButton.triggerClick()).process(new ValidLedgerHandler("2000-01-31", "", -10000000000000d, "Te", "Te")).run();
-//    }
+    public void testT1_66() throws Exception {
+        creatingDummyObjectforOtherModule("Te");
+        WindowInterceptor.init(ledgerButton.triggerClick()).process(new ValidLedgerHandler("2000-01-31", "Te", false, "", "Te", 100000000000.00, "Te")).run();
+    }
 
     //T1-67
 //    @Test
-//    public void testAddAndDeleteLedgersWithEmptyCategory() throws Exception {
-//        WindowInterceptor.init(ledgerButton.triggerClick()).process(new ValidLedgerHandler("2000-01-31", "$", -10000000000000d, "Te", "")).run();
-//    }
+    public void testT1_67() throws Exception {
+        creatingDummyObjectforOtherModule("Te");
+        WindowInterceptor.init(ledgerButton.triggerClick()).process(new ValidLedgerHandler("2000-01-31", "Te", false, "$", "", -100000000000.00, "Te")).run();
+    }
 
     //T1-68
 //    @Test
-//    public void testAddAndDeleteLedgersWithEmptyAmount() throws Exception {
-//        WindowInterceptor.init(ledgerButton.triggerClick()).process(new ValidLedgerHandler("2000-01-31", "$", Double.NaN, "Te", "Te")).run();
-//    }
+    public void testAddAndDeleteLedgersWithEmptyAmount() throws Exception {
+        creatingDummyObjectforOtherModule("Te");
+        WindowInterceptor.init(ledgerButton.triggerClick()).process(new ValidLedgerHandler("2000-01-31", "Te", false, "$", "Te", Double.NaN, "Te")).run();
+    }
 
     //T1-69
 //    @Test
 //    public void testAddAndDeleteLedgersWithInvalidAmountChar() throws Exception {
-//        WindowInterceptor.init(ledgerButton.triggerClick()).process(new ValidLedgerHandler("2000-01-31", "$", -10000000000000d, "Te", "Te")).run();
+//        creatingDummyObjectforOtherModule("Te");
+//        WindowInterceptor.init(ledgerButton.triggerClick()).process(new ValidLedgerHandler("2000-01-31", "Te",  false, "$", "Te", "-###100000000000.00",  "Te")).run();
 //    }
-
+//
 //    public void testT1_70(){
 //        creatingDummyObjectforOtherModule("Te");
-//        WindowInterceptor.init(ledgerButton.triggerClick()).process(new ValidLedgerHandler("2000-01-31", "Te", false, "A", "Te", 100000000000c, "Te")).run();
+//        WindowInterceptor.init(ledgerButton.triggerClick()).process(new ValidLedgerHandler("2000-01-31", "Te", false, "A", "Te", "100000000000c", "Te")).run();
 //    }
 
     public void testT1_71(){
@@ -435,18 +438,16 @@ public class LedgersTest extends FinancejAbstractTest {
             }else{
                 recCheckBox.unselect();
             }
-            System.out.println("Line 345, did we get here?");
             int beforeAdding = ledgerTable.getRowCount();
 
             amountTextBox.setText(String.valueOf(amount));
             categoryComboBox.select(category);
             accountCombo.select(account);
-            System.out.println("Line 347, before adding transaction");
             window.getButton("Add Transaction").click();
-            System.out.println("Line 348, after adding transaction");
 
             int afterAdding = ledgerTable.getRowCount();
             if(beforeAdding < afterAdding){
+                System.out.println("New Transaction was added.");
                 assert true;
             }else{
                 assert false;

@@ -412,13 +412,26 @@ class AccountListTableModel extends AbstractTableModel {
     public int AddAccount(String Name, String Description) {
         int ErrorCode = 0;
         PreparedStatement psInsert;
+        Statement psSelect;
         try {
             if(Name.length()>1 && Name.matches("[a-zA-Z0-9]+") && Name.length() <= 50 && !Description.isEmpty() && Description.length() <= 250) {
                 psInsert = conn.prepareStatement("insert into account(name, description) values(?,?)");
                 psInsert.setString(1, Name);
                 psInsert.setString(2, Description);
 
+                psSelect = conn.createStatement();
+                ResultSet resultSet = psSelect.executeQuery("Select count(*) from account");
+
+                System.out.println("Line 428 -- " + resultSet.next());
+                int beforeAddingAccount = resultSet.getInt(1);
+                System.out.println("Account.java Line 426 -- This is the value of Before Adding Account : " + beforeAddingAccount);
                 psInsert.executeUpdate();
+
+                resultSet = psSelect.executeQuery("Select count(*) from account");
+                resultSet.next();
+                int afterAddingAccount = resultSet.getInt(1);
+                System.out.println("Account.java Line 430 -- This is the value of after Adding Account : " + afterAddingAccount);
+
                 System.out.println("New account object was added: " + Name);
                 fireTableRowsInserted(getRowCount() + 1, getRowCount() + 1);
             } if (Name.length()<2 || !Name.matches("[a-zA-Z0-9]+") || Name.length() > 50) {
