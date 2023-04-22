@@ -40,7 +40,7 @@ public class Account extends javax.swing.JDialog {
      * @param DBConn the db conn
      */
     public void SetDBConnection(Connection DBConn) {
-        dataModel = new AccountTableModel(derbyUtils.getConnection());
+        dataModel = new AccountTableModel();
         AccountListTable.setModel(dataModel);
     }
 
