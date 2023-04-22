@@ -17,7 +17,7 @@ public class DerbyUtils {
 
     private static DerbyUtils instance = null;
 
-    public Connection getConn() {
+    public Connection getConnection() {
         return conn;
     }
 
