@@ -91,7 +91,6 @@ public class FinanceJ extends javax.swing.JFrame {
 
         AppAccountDialog = new AppAccount(this, true);
         AccountDialog.setVisible(false);
-        AccountDialog.SetDBConnection(derbyUtils.getConnection());
 
         CategoryDialog = new Category(this, true);
         CategoryDialog.setVisible(false);
