@@ -68,7 +68,7 @@ public abstract class AccountDAO extends AbstractTableModel {
 
             fireTableCellUpdated(row, col);
         } catch (Throwable e) {
-            System.out.println(" . . . exception thrown: in setValueAt in Account.java");
+            System.out.println(" . . . exception thrown: in setValueAt in AccountDialog.java");
             e.printStackTrace();
         }
     }
@@ -126,13 +126,13 @@ public abstract class AccountDAO extends AbstractTableModel {
 
                 System.out.println("Line 428 -- " + resultSet.next());
                 int beforeAddingAccount = resultSet.getInt(1);
-                System.out.println("Account.java Line 426 -- This is the value of Before Adding Account : " + beforeAddingAccount);
+                System.out.println("AccountDialog.java Line 426 -- This is the value of Before Adding Account : " + beforeAddingAccount);
                 psInsert.executeUpdate();
 
                 resultSet = psSelect.executeQuery("Select count(*) from account");
                 resultSet.next();
                 int afterAddingAccount = resultSet.getInt(1);
-                System.out.println("Account.java Line 430 -- This is the value of after Adding Account : " + afterAddingAccount);
+                System.out.println("AccountDialog.java Line 430 -- This is the value of after Adding Account : " + afterAddingAccount);
 
                 System.out.println("New account object was added: " + Name);
                 fireTableRowsInserted(getRowCount() + 1, getRowCount() + 1);

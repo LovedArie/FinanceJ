@@ -26,7 +26,7 @@ public class FinanceJ extends javax.swing.JFrame {
 
     public static XMLTools xmlTools = new XMLTools();
     // define the driver to use
-    private Account AccountDialog;
+    private AccountDialog AccountDialog;
     private AppAccount AppAccountDialog;
     private Category CategoryDialog;
     private Ledger LedgerDialog;
@@ -85,7 +85,7 @@ public class FinanceJ extends javax.swing.JFrame {
         LedgerDialog.setVisible(false);
         LedgerDialog.SetDBConnection(derbyUtils.getConnection());
 
-        AccountDialog = new Account(this, true);
+        AccountDialog = new AccountDialog(this, true);
         AccountDialog.setVisible(false);
         AccountDialog.SetDBConnection(derbyUtils.getConnection());
 
