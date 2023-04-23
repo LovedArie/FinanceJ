@@ -1,28 +1,25 @@
 package ca.etsmtl.log240.financej;
 /*
- * Account.java
+ * AccountDialog.java
  *
  * Created on March 5, 2008, 11:08 PM
  */
 
 import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 
-public class Account extends javax.swing.JDialog {
+
+
+public class AccountDialog extends javax.swing.JDialog {
     /**
      * The type Account.
      *
      * @author rovitotv
      */
-
-    private Connection conn = null;
-    private AccountListTableModel dataModel;
+    DerbyUtils derbyUtils = DerbyUtils.getInstance();
+    private AccountTableModel dataModel;
 
     /**
      * Creates new form Account  @param parent the parent
@@ -31,7 +28,7 @@ public class Account extends javax.swing.JDialog {
      * @param modal  the modal
      */
 
-    public Account(java.awt.Frame parent, boolean modal) {
+    public AccountDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         AccountListTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -43,8 +40,7 @@ public class Account extends javax.swing.JDialog {
      * @param DBConn the db conn
      */
     public void SetDBConnection(Connection DBConn) {
-        conn = DBConn;
-        dataModel = new AccountListTableModel(conn);
+        dataModel = new AccountTableModel();
         AccountListTable.setModel(dataModel);
     }
 
@@ -224,14 +220,14 @@ public class Account extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                Account dialog = new Account(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                AccountDialog accountDialog = new AccountDialog(new javax.swing.JFrame(), true);
+                accountDialog.addWindowListener(new java.awt.event.WindowAdapter() {
 
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
                 });
-                dialog.setVisible(true);
+                accountDialog.setVisible(true);
             }
         });
     }
@@ -247,204 +243,4 @@ public class Account extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
-}
-
-/**
- * The type Account list table model.
- */
-class AccountListTableModel extends AbstractTableModel {
-
-    private String[] columnNames = {"Name", "Description"};
-    private Connection conn = null;
-
-    /**
-     * Instantiates a new Account list table model.
-     *
-     * @param DBConn the db conn
-     */
-    public AccountListTableModel(Connection DBConn) {
-        conn = DBConn;
-    }
-
-    public int getColumnCount() {
-        return columnNames.length;
-    }
-
-    public int getRowCount() {
-        ResultSet AccountResult;
-        Statement s;
-
-        if (conn != null) {
-            try {
-                s = conn.createStatement();
-                AccountResult = s.executeQuery("select count(name) from account");
-                while (AccountResult.next()) {
-                    return AccountResult.getInt(1);
-                }
-            } catch (Throwable e) {
-                System.out.println(" . . . exception thrown: in AccountListTableModel getRowCount");
-                e.printStackTrace();
-            }
-        }
-
-        return 0;
-    }
-
-    public String getColumnName(int col) {
-        return columnNames[col];
-    }
-
-    public Object getValueAt(int row, int col) {
-        ResultSet AccountResult;
-        Statement s;
-        int CurrentRow = 0;
-
-        if (conn != null) {
-            try {
-                s = conn.createStatement();
-                AccountResult = s.executeQuery("select * from account order by name");
-                while (AccountResult.next()) {
-                    if (CurrentRow == row) {
-                        if (col == 0) {
-                            return AccountResult.getString(1);
-                        } else if (col == 1) {
-                            return AccountResult.getString(2);
-                        }
-                    }
-                    CurrentRow++;
-                }
-            } catch (Throwable e) {
-                System.out.println(" . . . exception thrown: in AccountListTableModel getValueAt");
-                e.printStackTrace();
-            }
-        }
-        return "";
-    }
-
-    public Class getColumnClass(int c) {
-        return getValueAt(0, c).getClass();
-    }
-
-    /*
-     * Don't need to implement this method unless your table's
-     * editable.
-     */
-    public boolean isCellEditable(int row, int col) {
-        //Note that the data/cell address is constant,
-        //no matter where the cell appears onscreen.
-
-
-        if (col == 0) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    public void setValueAt(Object value, int row, int col) {
-        String SQLString;
-
-        String AccountName;
-        try {
-            AccountName = (String) getValueAt(row, 0);
-            Statement s = conn.createStatement();
-            SQLString = "update account set description ='" + (String) value + "' where name = '" + AccountName + "'";
-            System.out.println(SQLString);
-            s.execute(SQLString);
-
-            fireTableCellUpdated(row, col);
-        } catch (Throwable e) {
-            System.out.println(" . . . exception thrown: in setValueAt in Account.java");
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Delete account.
-     *
-     * @param row the row
-     */
-    public void DeleteAccount(int row) {
-        Statement s;
-        String AccountName;
-        String SQLString;
-
-        if (conn != null) {
-            try {
-                AccountName = (String) getValueAt(row, 0);
-                s = conn.createStatement();
-                SQLString = "DELETE FROM account WHERE name = '" + AccountName + "'";
-                System.out.println(SQLString);
-                s.executeUpdate(SQLString);
-                fireTableDataChanged();
-            } catch (Throwable e) {
-                System.out.println(" . . . exception thrown: in AccountListTableModel DeleteAccount");
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public void DeleteAllAccounts() {
-        Statement s;
-        String SQLString;
-
-        if (conn != null) {
-            try {
-                s = conn.createStatement();
-                SQLString = "DELETE FROM account";
-                System.out.println(SQLString);
-                s.executeUpdate(SQLString);
-                fireTableDataChanged();
-            } catch (Throwable e) {
-                System.out.println(" . . . exception thrown: in AccountListTableModel DeleteAllAccounts");
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * Add account int.
-     *
-     * @param Name        the name
-     * @param Description the description
-     * @return the int
-     */
-    public int AddAccount(String Name, String Description) {
-        int ErrorCode = 0;
-        PreparedStatement psInsert;
-        Statement psSelect;
-        try {
-            if(Name.length()>1 && Name.matches("[a-zA-Z0-9]+") && Name.length() <= 50 && !Description.isEmpty() && Description.length() <= 250) {
-                psInsert = conn.prepareStatement("insert into account(name, description) values(?,?)");
-                psInsert.setString(1, Name);
-                psInsert.setString(2, Description);
-
-                psSelect = conn.createStatement();
-                ResultSet resultSet = psSelect.executeQuery("Select count(*) from account");
-
-                System.out.println("Line 428 -- " + resultSet.next());
-                int beforeAddingAccount = resultSet.getInt(1);
-                System.out.println("Account.java Line 426 -- This is the value of Before Adding Account : " + beforeAddingAccount);
-                psInsert.executeUpdate();
-
-                resultSet = psSelect.executeQuery("Select count(*) from account");
-                resultSet.next();
-                int afterAddingAccount = resultSet.getInt(1);
-                System.out.println("Account.java Line 430 -- This is the value of after Adding Account : " + afterAddingAccount);
-
-                System.out.println("New account object was added: " + Name);
-                fireTableRowsInserted(getRowCount() + 1, getRowCount() + 1);
-            } if (Name.length()<2 || !Name.matches("[a-zA-Z0-9]+") || Name.length() > 50) {
-                throw new Throwable("name is less than 2 characters , contains illegal characters or is too long");
-            } if (Description.isEmpty() || Description.length() > 250) {
-                throw new Throwable("description is empty or too long");
-            }
-        } catch (Throwable e) {
-            System.out.println(" . . . exception thrown: AddAccount");
-            System.out.println(e.getMessage());
-            ErrorCode = 1;
-        }
-
-        return ErrorCode;
-    }
 }
