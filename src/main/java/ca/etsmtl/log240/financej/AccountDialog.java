@@ -18,7 +18,6 @@ public class AccountDialog extends javax.swing.JDialog {
      *
      * @author rovitotv
      */
-    DerbyUtils derbyUtils = DerbyUtils.getInstance();
     private AccountTableModel dataModel;
 
     /**
