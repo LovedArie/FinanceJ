@@ -1,6 +1,6 @@
 package ca.etsmtl.log240.financej;
 /*
- * Category.java
+ * CategoryDialog.java
  *
  * Created on March 9, 2008, 6:03 PM
  */
@@ -14,9 +14,8 @@ import java.sql.Connection;
  *
  * @author rovitotv
  */
-public class Category extends javax.swing.JDialog {
+public class CategoryDialog extends javax.swing.JDialog {
 
-    private Connection conn = null;
     private CategoryTableModel dataModel;
 
     /**
@@ -24,7 +23,7 @@ public class Category extends javax.swing.JDialog {
      *
      * @param modal the modal
      */
-    public Category(java.awt.Frame parent, boolean modal) {
+    public CategoryDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         CategoryListTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -36,10 +35,10 @@ public class Category extends javax.swing.JDialog {
      * @param DBConn the db conn
      */
     public void SetDBConnection(Connection DBConn) {
-        conn = DBConn;
         dataModel = new CategoryTableModel();
         CategoryListTable.setModel(dataModel);
     }
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -185,11 +184,6 @@ public class Category extends javax.swing.JDialog {
     private void AddCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCategoryButtonActionPerformed
         int ReturnCode;
 
-//        BudgetValue = BudgetTextField.getText();
-//        if(BudgetValue.isEmpty()==false)
-//            Budget = Float.valueOf(BudgetValue.trim()).floatValue();
-//        System.out.println("Test budget : " + Budget);
-
         ReturnCode = dataModel.AddCategory(NameTextField.getText(), DescriptionTextField.getText(), BudgetTextField.getText());
         if (ReturnCode == 0) {
             NameTextField.setText("");
@@ -226,7 +220,7 @@ public class Category extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                Category dialog = new Category(new javax.swing.JFrame(), true);
+                CategoryDialog dialog = new CategoryDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
 
                     public void windowClosing(java.awt.event.WindowEvent e) {

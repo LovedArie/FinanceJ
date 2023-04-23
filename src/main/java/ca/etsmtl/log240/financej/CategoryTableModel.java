@@ -43,6 +43,26 @@ public class CategoryTableModel extends CategoryDAO {
         }
     }
 
+    public int getRowcount(){
+        return super.getRowCount();
+    }
+
+    public Object getValueAt(int row, int col){
+        return super.getValueAt(row, col);
+    }
+
+    public void setValueAt(Object value, int row, int col){
+        super.setValueAt(value, row, col);
+    }
+
+    public void DeleteCategory(int row){
+        super.DeleteCategory(row);
+    }
+
+    public int AddCategory(String Name, String Description, String budget){
+        return super.AddCategory(Name, Description, budget);
+    }
+
 
 
 

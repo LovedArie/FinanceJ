@@ -1,7 +1,10 @@
 package ca.etsmtl.log240.financej;
 
 import javax.swing.table.AbstractTableModel;
+import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public abstract class CategoryDAO extends AbstractTableModel {
@@ -80,7 +83,7 @@ public abstract class CategoryDAO extends AbstractTableModel {
 
             fireTableCellUpdated(row, col);
         } catch (Throwable e) {
-            System.out.println(" . . . exception thrown: in setValueAt in Category.java");
+            System.out.println(" . . . exception thrown: in setValueAt in CategoryDialog.java");
             e.printStackTrace();
         }
     }
@@ -111,6 +114,49 @@ public abstract class CategoryDAO extends AbstractTableModel {
         }
     }
 
+    /**
+     * Add category int.
+     *
+     * @param Name        the name
+     * @param Description the description
+     * @param budget      the budget
+     * @return the int
+     */
+    public int AddCategory(String Name, String Description, String budget) {
+        int ErrorCode = 0;
+        PreparedStatement psInsert;
 
+
+        try {
+            double _budget = Double.parseDouble(budget);
+            if (Name.isEmpty() == false && Name.length() >= 2 && Name.length() <= 50 && Name.matches("^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$")
+                    && Description.isEmpty() == false && Description.length() >= 1
+                    && Description.length() <= 250 && _budget >= -100000000000000.00 && _budget <= 1000000000000.00) {
+                psInsert = derbyUtils.getConnection().prepareStatement("insert into category(name, description, budget) values(?,?,?)");
+                psInsert.setString(1, Name);
+                psInsert.setString(2, Description);
+                psInsert.setDouble(3, _budget);
+                psInsert.executeUpdate();
+                fireTableRowsInserted(getRowCount() + 1, getRowCount() + 1);
+            } else
+                throw new Throwable("Nom/Description/Budget ne correspondant pas aux critères");
+        } catch (SQLException e) {
+            System.out.println(". . . SQL Exception thrown: AddCategory" + "\n" + e.getMessage());
+            ErrorCode = 1;
+        } catch (IOException e) {
+            System.out.println(". . . IO Exception thrown: AddCategory" + "\n" + e.getMessage());
+            ErrorCode = 1;
+        } catch (NumberFormatException e) {
+            System.out.println(". . . NumberFormatException thrown: AddCategory" + "\n" + e.getMessage());
+            ErrorCode = 1;
+        } catch (Throwable e) {
+            System.out.println(" . . . exception thrown: AddCategory");
+            System.out.println(e.getMessage());
+            ErrorCode = 1;
+        }
+
+        return ErrorCode;
+
+    }
 
 }
