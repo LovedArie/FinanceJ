@@ -5,10 +5,13 @@ package ca.etsmtl.log240.financej;
  * Created on March 9, 2008, 6:03 PM
  */
 
-import java.awt.*;
-import java.sql.*;
-import javax.swing.table.*;
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import java.awt.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  * The type Category.
@@ -185,15 +188,13 @@ public class Category extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
     private void AddCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCategoryButtonActionPerformed
         int ReturnCode;
-        String BudgetValue;
-        float Budget = 1000f;
 
-        BudgetValue = BudgetTextField.getText();
-        if(BudgetValue.isEmpty()==false)
-            Budget = Float.valueOf(BudgetValue.trim()).floatValue();
-        System.out.println("Test budget : " + Budget);
+//        BudgetValue = BudgetTextField.getText();
+//        if(BudgetValue.isEmpty()==false)
+//            Budget = Float.valueOf(BudgetValue.trim()).floatValue();
+//        System.out.println("Test budget : " + Budget);
 
-        ReturnCode = dataModel.AddCategory(NameTextField.getText(), DescriptionTextField.getText(), Budget);
+        ReturnCode = dataModel.AddCategory(NameTextField.getText(), DescriptionTextField.getText(), BudgetTextField.getText());
         if (ReturnCode == 0) {
             NameTextField.setText("");
             DescriptionTextField.setText("");
@@ -408,19 +409,24 @@ class CategoryListTableModel extends AbstractTableModel {
      * @param budget      the budget
      * @return the int
      */
-    public int AddCategory(String Name, String Description, float budget) {
+    public int AddCategory(String Name, String Description, String budget) {
         int ErrorCode = 0;
         PreparedStatement psInsert;
 
+
+
         try {
-            if(Name.isEmpty()==false && Name.length()>=2 && Name.length()<=50 && Name.matches("[a-zA-Z0-9]+")
+            System.out.println("I'm here line 419 Category");
+            double _budget = Double.parseDouble(budget);
+            System.out.println("I'm There line 421 Category -- Valie of _budget : " + _budget);
+            System.out.println("_budget>=-100000000000.00 : " + (_budget>=-100000000000000.00));
+            if(Name.isEmpty()==false && Name.length()>=2 && Name.length()<=50 && Name.matches("^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$")
                     && Description.isEmpty()==false && Description.length()>=1
-                    && Description.length()<=250 && budget>=-8_000_000_000.00000 && budget<=80_000_000_000.00000) {
+                    && Description.length()<=250 && _budget>=-100000000000000.00 && _budget<=1000000000000.00) {
                 psInsert = conn.prepareStatement("insert into category(name, description, budget) values(?,?,?)");
                 psInsert.setString(1, Name);
                 psInsert.setString(2, Description);
-                psInsert.setFloat(3, budget);
-
+                psInsert.setDouble(3, _budget);
                 psInsert.executeUpdate();
                 fireTableRowsInserted(getRowCount() + 1, getRowCount() + 1);
             } else

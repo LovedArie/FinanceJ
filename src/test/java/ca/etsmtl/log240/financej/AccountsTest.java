@@ -137,7 +137,7 @@ public class AccountsTest extends FinancejAbstractTest {
                 case 1:
                     //delete all rows if they exist
                     if (rowCount > 0) {
-                        for (int i = 0; i < rowCount - 1 ; i++) {
+                        for (int i = 0; i < rowCount ; i++) {
                             // select the first row with the specified name and delete it
                             accountsTable.selectRow(1);
                             window.getButton("Delete Account").click();
