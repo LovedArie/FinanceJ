@@ -99,6 +99,7 @@ public abstract class AccountDAO extends AbstractTableModel {
 
         if (derbyUtils.getConnection() != null) {
             try {
+                System.out.println("AccountDAO line 102 -- Get Row Count : " + getRowCount());
                 s = derbyUtils.getConnection().createStatement();
                 SQLString = "DELETE FROM account";
                 System.out.println(SQLString);
@@ -115,8 +116,16 @@ public abstract class AccountDAO extends AbstractTableModel {
         int ErrorCode = 0;
         PreparedStatement psInsert;
         Statement psSelect;
+
+        System.out.print("We will now begin the process of adding an account : \n" + "Name.length()>1 : " );
+        System.out.println(Name.length() > 1);
+        System.out.print("Name.matches(\"[a-zA-Z0-9]+\") : ");
+        System.out.println(Name.matches("^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$"));
+        System.out.print("Name.length() <= 50 : ");
+        System.out.println(Name.length() <= 50);
+
         try {
-            if(Name.length()>1 && Name.matches("[a-zA-Z0-9]+") && Name.length() <= 50 && !Description.isEmpty() && Description.length() <= 250) {
+            if(Name.length()>1 && Name.matches("^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$") && Name.length() <= 50 && !Description.isEmpty() && Description.length() <= 250) {
                 psInsert = derbyUtils.getConnection().prepareStatement("insert into account(name, description) values(?,?)");
                 psInsert.setString(1, Name);
                 psInsert.setString(2, Description);
@@ -136,7 +145,7 @@ public abstract class AccountDAO extends AbstractTableModel {
 
                 System.out.println("New account object was added: " + Name);
                 fireTableRowsInserted(getRowCount() + 1, getRowCount() + 1);
-            } if (Name.length()<2 || !Name.matches("[a-zA-Z0-9]+") || Name.length() > 50) {
+            } if (Name.length()<2 || !Name.matches("^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$") || Name.length() > 50) {
                 throw new Throwable("name is less than 2 characters , contains illegal characters or is too long");
             } if (Description.isEmpty() || Description.length() > 250) {
                 throw new Throwable("description is empty or too long");
