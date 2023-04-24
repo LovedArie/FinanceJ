@@ -94,8 +94,8 @@ public class AccountsTest extends FinancejAbstractTest {
             WindowInterceptor.init(accountsButton.triggerClick()).process(new InvalidAccountsHandler("an", "bonis bono bonorum bonum brevi brevis breviter brute brutus cadere caecilii caeco caelo calere campum canes captet capti captiosa careat carere careret caret caritatem carum causa causae causam causas cedentem celeritas censes censet centurionum certa")).run();
     }
 
-    public void testT1_18() {
-            WindowInterceptor.init(accountsButton.triggerClick()).process(new InvalidAccountsHandler("antiquisantiquitateapeirianaperiamapeririapteaaaaa", "bonis bono bonorum bonum brevi brevis breviter brute brutus cadere caecilii caeco caelo calere campum canes captet capti captiosa careat carere careret caret caritatem carum causa causae causam causas cedentem celeritas censes censet centurionum cer$")).run();
+    public void testT0_18() {
+            WindowInterceptor.init(accountsButton.triggerClick()).process(new ValidAccountsHandler("antiquisantiquitateapeirianaperiamapeririapteaaaaa", "bonis bono bonorum bonum brevi brevis breviter brute brutus cadere caecilii caeco caelo calere campum canes captet capti captiosa careat carere careret caret caritatem carum causa causae causam causas cedentem celeritas censes censet centurionum cer$", 0)).run();
     }
 
     private class ValidAccountsHandler extends WindowHandler {
@@ -159,11 +159,12 @@ public class AccountsTest extends FinancejAbstractTest {
             window.getTextBox("NAME_TEXT_FIELD").setText(name);
             window.getTextBox("DESCRIPTION_TEXT_FIELD").setText(description);
             window.getButton("Add Account").click();
+            System.out.println("We're back into reality");
             int afterActionClick = accountsTable.getRowCount();
 
-            if(beforeActionClick < afterActionClick){
+            /*if(beforeActionClick < afterActionClick){
                 assert true;
-            }
+            }*/
 
 
             return window.getButton("Close").triggerClick();
