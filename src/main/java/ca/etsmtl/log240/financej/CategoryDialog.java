@@ -1,34 +1,29 @@
 package ca.etsmtl.log240.financej;
 /*
- * Category.java
+ * CategoryDialog.java
  *
  * Created on March 9, 2008, 6:03 PM
  */
 
 import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 /**
  * The type Category.
  *
  * @author rovitotv
  */
-public class Category extends javax.swing.JDialog {
+public class CategoryDialog extends javax.swing.JDialog {
 
-    private Connection conn = null;
-    private CategoryListTableModel dataModel;
+    private CategoryTableModel dataModel;
 
     /**
      * Creates new form Category  @param parent the parent
      *
      * @param modal the modal
      */
-    public Category(java.awt.Frame parent, boolean modal) {
+    public CategoryDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         CategoryListTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -40,10 +35,10 @@ public class Category extends javax.swing.JDialog {
      * @param DBConn the db conn
      */
     public void SetDBConnection(Connection DBConn) {
-        conn = DBConn;
-        dataModel = new CategoryListTableModel(conn);
+        dataModel = new CategoryTableModel();
         CategoryListTable.setModel(dataModel);
     }
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -189,11 +184,6 @@ public class Category extends javax.swing.JDialog {
     private void AddCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCategoryButtonActionPerformed
         int ReturnCode;
 
-//        BudgetValue = BudgetTextField.getText();
-//        if(BudgetValue.isEmpty()==false)
-//            Budget = Float.valueOf(BudgetValue.trim()).floatValue();
-//        System.out.println("Test budget : " + Budget);
-
         ReturnCode = dataModel.AddCategory(NameTextField.getText(), DescriptionTextField.getText(), BudgetTextField.getText());
         if (ReturnCode == 0) {
             NameTextField.setText("");
@@ -230,7 +220,7 @@ public class Category extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                Category dialog = new Category(new javax.swing.JFrame(), true);
+                CategoryDialog dialog = new CategoryDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
 
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -255,189 +245,5 @@ public class Category extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
-}
-
-/**
- * The type Category list table model.
- */
-class CategoryListTableModel extends AbstractTableModel {
-
-    private String[] columnNames = {"Name", "Description", "Budget"};
-    private Connection conn = null;
-
-    /**
-     * Instantiates a new Category list table model.
-     *
-     * @param DBConn the db conn
-     */
-    public CategoryListTableModel(Connection DBConn) {
-        conn = DBConn;
-    }
-
-    public int getColumnCount() {
-        return columnNames.length;
-    }
-
-    public int getRowCount() {
-        ResultSet AccountResult;
-        Statement s;
-
-        if (conn != null) {
-            try {
-                s = conn.createStatement();
-                AccountResult = s.executeQuery("select count(name) from category");
-                while (AccountResult.next()) {
-                    return AccountResult.getInt(1);
-                }
-            } catch (Throwable e) {
-                System.out.println(" . . . exception thrown: in CategoryListTableModel getRowCount");
-                e.printStackTrace();
-            }
-        }
-
-        return 0;
-    }
-
-    public String getColumnName(int col) {
-        return columnNames[col];
-    }
-
-    public Object getValueAt(int row, int col) {
-        ResultSet CategoryResult;
-        Statement s;
-        int CurrentRow = 0;
-
-        if (conn != null) {
-            try {
-                s = conn.createStatement();
-                CategoryResult = s.executeQuery("select * from category order by name");
-                while (CategoryResult.next()) {
-                    if (CurrentRow == row) {
-                        if (col == 0) {
-                            return CategoryResult.getString(1);
-                        } else if (col == 1) {
-                            return CategoryResult.getString(2);
-                        } else if (col == 2) {
-                            return CategoryResult.getFloat(3);
-                        }
-                    }
-                    CurrentRow++;
-                }
-            } catch (Throwable e) {
-                System.out.println(" . . . exception thrown: in CategoryListTableModel getValueAt");
-                e.printStackTrace();
-            }
-        }
-        return "";
-    }
-
-    public Class getColumnClass(int c) {
-        return getValueAt(0, c).getClass();
-    }
-
-    /*
-     * Don't need to implement this method unless your table's
-     * editable.
-     */
-    public boolean isCellEditable(int row, int col) {
-        //Note that the data/cell address is constant,
-        //no matter where the cell appears onscreen.
-
-
-        if (col == 0) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    public void setValueAt(Object value, int row, int col) {
-        String SQLString = "";
-
-        String CategoryName;
-        try {
-            CategoryName = (String) getValueAt(row, 0);
-            Statement s = conn.createStatement();
-            if (col == 1) {
-                SQLString = "update category set description ='" + (String) value + "' where name = '" + CategoryName + "'";
-            } else if (col == 2) {
-                String StrValue;
-
-                StrValue = value.toString();
-                SQLString = "update category set budget = " + StrValue + " where name = '" + CategoryName + "'";
-            }
-            System.out.println(SQLString);
-            s.execute(SQLString);
-
-            fireTableCellUpdated(row, col);
-        } catch (Throwable e) {
-            System.out.println(" . . . exception thrown: in setValueAt in Category.java");
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Delete category.
-     *
-     * @param row the row
-     */
-    public void DeleteCategory(int row) {
-        Statement s;
-        String CategoryName;
-        String SQLString;
-
-        if (conn != null) {
-            try {
-                CategoryName = (String) getValueAt(row, 0);
-                s = conn.createStatement();
-                SQLString = "DELETE FROM category WHERE name = '" + CategoryName + "'";
-                System.out.println(SQLString);
-                s.executeUpdate(SQLString);
-                fireTableDataChanged();
-            } catch (Throwable e) {
-                System.out.println(" . . . exception thrown: in CategoryTableModel DeleteAccount");
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * Add category int.
-     *
-     * @param Name        the name
-     * @param Description the description
-     * @param budget      the budget
-     * @return the int
-     */
-    public int AddCategory(String Name, String Description, String budget) {
-        int ErrorCode = 0;
-        PreparedStatement psInsert;
-
-
-
-        try {
-            System.out.println("I'm here line 419 Category");
-            double _budget = Double.parseDouble(budget);
-            System.out.println("I'm There line 421 Category -- Valie of _budget : " + _budget);
-            System.out.println("_budget>=-100000000000.00 : " + (_budget>=-100000000000000.00));
-            if(Name.isEmpty()==false && Name.length()>=2 && Name.length()<=50 && Name.matches("^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$")
-                    && Description.isEmpty()==false && Description.length()>=1
-                    && Description.length()<=250 && _budget>=-100000000000000.00 && _budget<=1000000000000.00) {
-                psInsert = conn.prepareStatement("insert into category(name, description, budget) values(?,?,?)");
-                psInsert.setString(1, Name);
-                psInsert.setString(2, Description);
-                psInsert.setDouble(3, _budget);
-                psInsert.executeUpdate();
-                fireTableRowsInserted(getRowCount() + 1, getRowCount() + 1);
-            } else
-                throw new Throwable("Nom/Description/Budget ne correspondant pas aux critères");
-        } catch (Throwable e) {
-            System.out.println(" . . . exception thrown: AddCategory");
-            System.out.println(e.getMessage());
-            ErrorCode = 1;
-        }
-
-        return ErrorCode;
-    }
 }
 

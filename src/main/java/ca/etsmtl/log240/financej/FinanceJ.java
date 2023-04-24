@@ -28,7 +28,7 @@ public class FinanceJ extends javax.swing.JFrame {
     // define the driver to use
     private AccountDialog AccountDialog;
     private AppAccount AppAccountDialog;
-    private Category CategoryDialog;
+    private CategoryDialog CategoryDialog;
     private Ledger LedgerDialog;
     private Reports ReportsDialog;
     private AccountTotalTableModel dataModel;
@@ -92,7 +92,7 @@ public class FinanceJ extends javax.swing.JFrame {
         AppAccountDialog = new AppAccount(this, true);
         AccountDialog.setVisible(false);
 
-        CategoryDialog = new Category(this, true);
+        CategoryDialog = new CategoryDialog(this, true);
         CategoryDialog.setVisible(false);
         CategoryDialog.SetDBConnection(derbyUtils.getConnection());
 
